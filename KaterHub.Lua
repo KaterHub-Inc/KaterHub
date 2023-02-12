@@ -9,4 +9,4 @@
 
 ]]
 
--- Katerhub will be offline for now! because there is a chance of getting BANNED from Roblox!
+print("Katerhub will be offline for now! because there is a chance of getting BANNED from Roblox!")
