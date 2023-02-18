@@ -9,4 +9,5 @@
 
 ]]
 
-print("Katerhub will be offline for now! because there is a chance of getting BANNED from Roblox!")
+print("Katerhub will be online again after some time!")
+print("message on 18/2/23")
