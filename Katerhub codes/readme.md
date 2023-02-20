@@ -13,25 +13,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/KATERGaming/Roblox/ma
 
 Katerhub is getting updates Every Month!
 
-## Supported Games
-
-#### Best Scripts
-https://www.roblox.com/games/2693023319/Expedition-Antarctica
-https://www.roblox.com/games/189707/Natural-Disaster-Survival
-https://www.roblox.com/games/11606818992/1000M-STEEP-STEPS
-#### Best Trolling Scripts
-https://www.roblox.com/games/6884319169/MIC-UP
-https://www.roblox.com/games/6218169544/Korblox-Headless-Hangout
-#### Best Farming
-https://www.roblox.com/games/3956818381/Ninja-Legends
-https://www.roblox.com/games/3101667897/Legends-Of-Speed
-#### Normal Scripts
-https://www.roblox.com/games/155615604/Prison-Life-Cars-fixed
-https://www.roblox.com/games/2788229376/Da-Hood
-
 ---
 ## Discord
-#### Server
+#### Join for Updates!
 
 https://discord.gg/XkTZbeH5M8
 
