@@ -21,7 +21,7 @@ Its the thing that you can see on the side of the script!
     [7] = "Just a bunch of codes!",
     [8] = "Its Lit!",
     [9] = "Classic!",
-    [10] = "discord.gg/cQnp4MMYUn",
+    [10] = "discord.gg/",
     [11] = "Discord!",
     [12] = "ScriptBlox!",
     [13] = "More splashtags!",
