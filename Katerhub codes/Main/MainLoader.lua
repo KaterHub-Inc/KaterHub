@@ -1,22 +1,8 @@
 local ADMINS = {
-    87521950, -- Lerkermer
-    1342879760, -- w_6u
-    200547759, -- Mas2n
-    12344533453, -- SusLeveI100
-    44694442, -- MinecraftFan
-    2327113988, -- HaremGodA1den
-    2214013158, -- MiIIionares
-    92157681, -- Nina
+    87521950,
 }
 local MODS = {
-    430325969, -- KasysProperty
-    11212285, -- percs
-    2345019807,
-    67837292,
-    1981770367,
-    1581612339,
-    693789437,
-    1770295113,
+    430325969,
 }
 local STARS = {
     818022641,
@@ -39,49 +25,9 @@ local STARS = {
     484757047,
     2525829407,
     2376237627,
-    2227525102,
-    730101728,
-    494982615,
-    1289058590,
-    2455659548,
-    654024258, -- ripretro
-    331601222, -- wozispapi
-    1823901606, -- bbtttrflyy
-    354810459, ---kaykeljam72
-    244944859,
-    379270370,
-    1523390112,
-    23788749, -- new
-    195695405,
-    1382324180,
-    2346060279,
-    1660080643,
-    25169814,
-    494429223,
-    51405555,
-    2418360105,
-    175190440,
-    2255706751,
-    449952176,
-    2357610986,
-    2224078675,
-    272772978,
-    1494501304,
-    1939542762,
-    2224078675,
-    924595371,
-    1554640923,
-    552499725,
-    675578248,
-    2441435641, 
-    370312423,
-    2315353873,
+
 }
 local BOOSTERS = {
-    748134395, -- fyn
-    1826873689, -- yo bugga
-    195627100, -- fyn
-    730101728, -- 
     494982615,
     2409253491,
     640661916,
@@ -104,7 +50,7 @@ local formatNumber = (function(n)
     return n:reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
 end)
 
-local function checkswag()
+local function checkswa1g()
     for i,v in pairs(game:GetService('Workspace').Players:GetChildren()) do
         if v:FindFirstChild('UpperTorso') then
             if not v:FindFirstChild('UpperTorso'):FindFirstChild('OriginalSize') then
@@ -473,4 +419,4 @@ local function checkswag()
     end
 end
 
-local succ, errr = pcall(checkswag)
+local succ, errr = pcall(checkswa1g)
