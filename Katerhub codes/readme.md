@@ -22,7 +22,7 @@ https://discord.gg/XkTZbeH5M8
 
 #### Contact me!
 
-Kater#0001
 https://discord.com/users/744226406111772796
 
 ---
+Made by Kater#0001
