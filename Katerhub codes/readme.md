@@ -1,7 +1,7 @@
 # Katerhub
-Goofy ahh sceenshot
+Image of the script
 
-<img src="https://i.ibb.co/zJn6kz6/Katerhub-Png.png">
+<img src="https://i.ibb.co/z7Fm8w6/Neues-Projekt.png">
 
 ## script
 
@@ -11,16 +11,18 @@ Goofy ahh sceenshot
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KATERGaming/Roblox/main/KaterHub.Lua"))()
 ```
 
-Katerhub is getting updates Every Month!
+If you are searching for an keyless roblox script made for trolling and more use Katerhub!
+the games are in our discord!
 
 ---
-## Discord
-#### Join for Updates!
+## Katerhub Discord
+#### Join for Updates and more!
 
 https://discord.gg/XkTZbeH5M8
 
-#### Profile
+#### Contact me!
 
+Kater#0001
 https://discord.com/users/744226406111772796
 
 ---
