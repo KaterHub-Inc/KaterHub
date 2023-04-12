@@ -18,11 +18,11 @@ the games are in our discord!
 ## Katerhub Discord
 #### Join for Updates and more!
 
-https://discord.gg/XkTZbeH5M8
+https://discord.gg/gv8TGUxDzU
 
 #### Contact me!
 
-https://discord.com/users/744226406111772796
+https://discord.com/users/947868747576778822
 
 ---
 Made by Kater#0001
