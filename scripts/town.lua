@@ -634,6 +634,7 @@ end)
 
 LoadPlot.MouseButton1Click:Connect(function()
     if CachedBuilds[CurrentSelection] then
+	wait(3)
         BuildPlot(CachedBuilds[CurrentSelection][1],CachedBuilds[CurrentSelection][2])
     end
 end)
