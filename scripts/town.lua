@@ -284,7 +284,7 @@ local function CreatePart(Position,PartInstance)
         Type = "Ball"
     end
     
-    wait(2)
+    wait(1.6)
     local args = {
         [1] = "CreatePart",
         [2] = Type,
