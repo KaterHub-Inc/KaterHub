@@ -283,7 +283,8 @@ local function CreatePart(Position,PartInstance)
     elseif PartInstance.Shape == Enum.PartType.Ball then
         Type = "Ball"
     end
-
+    
+    wait(2)
     local args = {
         [1] = "CreatePart",
         [2] = Type,
