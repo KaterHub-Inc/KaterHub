@@ -1,6 +1,6 @@
 local Nofitication = {}
 
-local GUI = game:GetService("CoreGui"):FindFirstChild("STX_Nofitication")
+local GUI = game:GetService("CoreGui"):FindFirstChild("KH-Nofitication")
 function Nofitication:Notify(nofdebug, middledebug, all)
     local SelectedType = string.lower(tostring(middledebug.Type))
     local ambientShadow = Instance.new("ImageLabel")
