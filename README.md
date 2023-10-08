@@ -5,6 +5,5 @@
 --- New Source
 ```
 
-# Credits
-discord.gg/gv8TGUxDzU
+# [Credits](discord.gg/gv8TGUxDzU)
 - [@katerhub]
