@@ -9,12 +9,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/Kater
 # 
 
 
-# Features
-
-- Keyless
-- Safe
-- Free
-
-
- Credits
-- [@katerhub]
+# Premium
+```css
+:
+```
