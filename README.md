@@ -15,11 +15,13 @@ Remember you can only use those commands on players that executed our script in 
 + adds a emoji to your name. [⭐]
 + makes you immune to other premium users.
 
+example: :bring [USERNAME] or "." = everyone
+
 ```css
 :bring
 :kill
 :fling
-:un/freeze
+:freeze or :unfreeze
 :kick
 ```
 (This product can be bought once per account and costs 25 robux!)
