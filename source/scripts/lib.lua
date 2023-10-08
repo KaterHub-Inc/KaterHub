@@ -5,6 +5,8 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
+local katerhubadmins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))()
+local katerhubstars = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
 local pfp
 local user
 local tag
@@ -19,10 +21,17 @@ user =  userinfo["user"] or game.Players.LocalPlayer.Name
 tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
-	userinfo["picture"] = pfp
-	userinfo["user"] = user
-	userinfo["discriminator"] = tag
-	writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
+	if not table.find(katerhubadmins, LocalPlayer.UserId) then
+		userinfo["picture"] = pfp
+		userinfo["user"] = user
+		userinfo["discriminator"] = tag
+		writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
+	else
+		userinfo["picture"] = pfp
+		userinfo["user"] = user
+		userinfo["discriminator"] = "TRUE"
+		writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
+	end
 end
 
 local function MakeDraggable(topbarobject, object)
