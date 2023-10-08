@@ -11,18 +11,18 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("KaterHubLibinfo.txt"));
+	userinfo = HttpService:JSONDecode(readfile("KaterHub-Data.json"));
 end)
 
-pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 user =  userinfo["user"] or game.Players.LocalPlayer.Name
-tag = userinfo["tag"] or tostring(math.random(1000,9999))
+tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
-	userinfo["pfp"] = pfp
+	userinfo["picture"] = pfp
 	userinfo["user"] = user
-	userinfo["tag"] = tag
-	writefile("KaterHubLibinfo.txt", HttpService:JSONEncode(userinfo));
+	userinfo["discriminator"] = tag
+	writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
