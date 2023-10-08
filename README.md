@@ -2,8 +2,8 @@
 
 # Script
 ```lua
---- New Source
-loadstring(game:HttpGet(""))()
+--- Updated Source
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/KaterHub/main/main.lua"))()
 ```
 
 # Credits
