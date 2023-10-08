@@ -1,4 +1,4 @@
-![Logo]([https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png](https://v3rmillion.net/images/logo.png)https://v3rmillion.net/images/logo.png)
+![Logo](https://tr.rbxcdn.com/15DAY-AvatarHeadshot-42B4EC603E92428745735C02D0358B54-Png/150/150/AvatarHeadshot/Png/noFilter)
 
 # Script
 ```lua
@@ -6,7 +6,7 @@
 ```
 
 
-# Features
+# Features()
 
 - Light/dark mode toggle
 - Live previews
