@@ -10,6 +10,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/Kater
 
 
 # Premium
+Remember you can only use those commands on players that executed our script in your lobby/game!
+
++ adds a emoji to your name. [⭐]
++ makes you immune to other premium users.
+
 ```css
-:
+:bring
+:kill
+:fling
+:un/freeze
+:kick
 ```
+(This product can be bought once per account and costs 25 robux!)
