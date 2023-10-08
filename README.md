@@ -6,5 +6,5 @@
 ```
 
 # Credits
-
+discord.gg/gv8TGUxDzU
 - [@katerhub]
