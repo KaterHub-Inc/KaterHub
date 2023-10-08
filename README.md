@@ -6,7 +6,7 @@
 ```
 
 
-# Features(https://tr.rbxcdn.com/15DAY-AvatarHeadshot-BC4EA654C2E14C7938FA887F98261D75-Png/150/150/AvatarHeadshot/Png/noFilter)
+# [Features](https://tr.rbxcdn.com/15DAY-AvatarHeadshot-BC4EA654C2E14C7938FA887F98261D75-Png/150/150/AvatarHeadshot/Png/noFilter)
 
 - Light/dark mode toggle
 - Live previews
