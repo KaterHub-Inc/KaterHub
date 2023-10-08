@@ -1,4 +1,4 @@
-local DiscordLib = {}
+local KaterHubLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -11,7 +11,7 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
+	userinfo = HttpService:JSONDecode(readfile("KaterHubLibinfo.txt"));
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
@@ -22,7 +22,7 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("discordlibinfo.txt", HttpService:JSONEncode(userinfo));
+	writefile("KaterHubLibinfo.txt", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -86,7 +86,7 @@ Discord.Name = "Discord"
 Discord.Parent = game.CoreGui
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function DiscordLib:Window(text)
+function KaterHubLib:Window(text)
 	local currentservertoggled = ""
 	local minimized = false
 	local fs = false
@@ -1515,7 +1515,7 @@ function DiscordLib:Window(text)
 		
 	end)
 	
-	function DiscordLib:Notification(titletext, desctext, btntext)
+	function KaterHubLib:Notification(titletext, desctext, btntext)
 		local NotificationHolderMain = Instance.new("TextButton")
 		local Notification = Instance.new("Frame")
 		local NotificationCorner = Instance.new("UICorner")
@@ -3244,4 +3244,4 @@ function DiscordLib:Window(text)
 	end
 	return ServerHold
 end
-return DiscordLib
+return KaterHubLib
