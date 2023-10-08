@@ -23,17 +23,10 @@ user =  userinfo["user"] or game.Players.LocalPlayer.Name
 tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
-	if not table.find(katerhubadmins, LocalPlayer.UserId) then
-		userinfo["picture"] = pfp
-		userinfo["user"] = user
-		userinfo["discriminator"] = tag
-		writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
-	else
-		userinfo["picture"] = pfp
-		userinfo["user"] = user
-		userinfo["discriminator"] = "TRUE"
-		writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
-	end
+	userinfo["picture"] = pfp
+	userinfo["user"] = user
+	userinfo["discriminator"] = tag
+	writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -1129,7 +1122,7 @@ function KaterHubLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "discord.gg/"..invite.."               Version "..version.."    "
+	DiscordInfo.Text = "KaterHub source"
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
