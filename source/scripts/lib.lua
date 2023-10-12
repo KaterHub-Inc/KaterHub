@@ -18,16 +18,9 @@ pcall(function()
 	userinfo = HttpService:JSONDecode(readfile("KaterHub-Data.json"));
 end)
 
-if table.find(katerhubadmins, game.Players.LocalPlayer.UserId) then
-	pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-	user =  "Adminstrator"
-	tag = "0000"
-else
-	pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-	user =  userinfo["user"] or game.Players.LocalPlayer.Name
-	tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
-end
-
+pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or game.Players.LocalPlayer.Name
+tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
 	userinfo["picture"] = pfp
@@ -532,7 +525,7 @@ function KaterHubLib:Window(text)
 	TextLabel.Position = UDim2.new(-0.0666666701, 0, 1.06666672, 0)
 	TextLabel.Size = UDim2.new(0, 34, 0, 22)
 	TextLabel.Font = Enum.Font.GothamSemibold
-	TextLabel.Text = "rightctrl"
+	TextLabel.Text = "close"
 	TextLabel.TextColor3 = Color3.fromRGB(113, 117, 123)
 	TextLabel.TextSize = 11.000
 
