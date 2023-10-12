@@ -85,10 +85,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
-Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local KHUI = Instance.new("ScreenGui")
+KHUI.Name = "KaterHub-"..game.Players.LocalPlayer.AccountAge.."-"..game.Players.LocalPlayer.UserId
+KHUI.Parent = game.CoreGui
+KHUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function KaterHubLib:Window(text)
 	local currentservertoggled = ""
