@@ -117,7 +117,7 @@ function KaterHubLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = Discord
+	MainFrame.Parent = KHUI
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -401,7 +401,7 @@ function KaterHubLib:Window(text)
 	local MyAccountBtnCorner = Instance.new("UICorner")
 	local MyAccountBtnTitle = Instance.new("TextLabel")
 	local SettingsTitle = Instance.new("TextLabel")
-	local DiscordInfo = Instance.new("TextLabel")
+	local KHUIInfo = Instance.new("TextLabel")
 	local CurrentSettingOpen = Instance.new("TextLabel")
 
 	SettingsFrame.Name = "SettingsFrame"
@@ -1115,19 +1115,19 @@ function KaterHubLib:Window(text)
 	SettingsTitle.TextSize = 11.000
 	SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-	DiscordInfo.Name = "DiscordInfo"
-	DiscordInfo.Parent = LeftFrame
-	DiscordInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	DiscordInfo.BackgroundTransparency = 1.000
-	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
-	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
-	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "We introduce players to the other side of Roblox."
-	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
-	DiscordInfo.TextSize = 13.000
-	DiscordInfo.TextWrapped = true
-	DiscordInfo.TextXAlignment = Enum.TextXAlignment.Left
-	DiscordInfo.TextYAlignment = Enum.TextYAlignment.Top
+	KHUIInfo.Name = "KHUIInfo"
+	KHUIInfo.Parent = LeftFrame
+	KHUIInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	KHUIInfo.BackgroundTransparency = 1.000
+	KHUIInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
+	KHUIInfo.Size = UDim2.new(0, 133, 0, 44)
+	KHUIInfo.Font = Enum.Font.Gotham
+	KHUIInfo.Text = "We introduce players to the other side of Roblox."
+	KHUIInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
+	KHUIInfo.TextSize = 13.000
+	KHUIInfo.TextWrapped = true
+	KHUIInfo.TextXAlignment = Enum.TextXAlignment.Left
+	KHUIInfo.TextYAlignment = Enum.TextYAlignment.Top
 
 	CurrentSettingOpen.Name = "CurrentSettingOpen"
 	CurrentSettingOpen.Parent = LeftFrame
