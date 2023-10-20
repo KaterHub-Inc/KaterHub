@@ -1,5 +1,4 @@
 local KaterHubLib = {}
-local KatersGUI = Instance.new("ScreenGui"); KatersGUI.Name = "KaterHub Notify"; KatersGUI.Parent = game.CoreGui; KatersGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -1530,71 +1529,129 @@ function KaterHubLib:Window(text)
 		
 	end)
 
-	function KaterHubLib:Msg(TitleText, Desc, Delay)
-	  	local Notification = Instance.new("Frame")
-		local Line = Instance.new("Frame")
-		local Warning = Instance.new("ImageLabel")
-		local UICorner = Instance.new("UICorner")
-		local Title = Instance.new("TextLabel")
-		local Description = Instance.new("TextLabel")
+	function KaterHubLib:Msg(title,desc,font,font2,visibletime)
+	pcall(function()
+	local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 	
-		Notification.Name = "Notification"
-		Notification.Parent = KatersGUI
-		Notification.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-		Notification.BackgroundTransparency = 0.400
-		Notification.BorderSizePixel = 0
-		Notification.Position = UDim2.new(1, 5, 0, 75)
-		Notification.Size = UDim2.new(0, 450, 0, 60)
+	local instances = {
+		["UICorner_1"] = Instance.new("UICorner"),
+		["LocalScript_1"] = Instance.new("LocalScript"),
+		["Frame_2"] = Instance.new("Frame"),
+		["UICorner_2"] = Instance.new("UICorner"),
+		["TextLabel_1"] = Instance.new("TextLabel"),
+		["Frame_1"] = Instance.new("Frame"),
+		["TextLabel_2"] = Instance.new("TextLabel"),
+		["LocalScript_2"] = Instance.new("LocalScript"),
+		["TextButton_1"] = Instance.new("TextButton"),
+	}
 	
-		Line.Name = "Line"
-		Line.Parent = Notification
-		Line.BackgroundColor3 = Color3.fromRGB(241, 196, 15)
-		Line.BorderSizePixel = 0
-		Line.Position = UDim2.new(0, 0, 0.938461304, 0)
-		Line.Size = UDim2.new(0, 0, 0, 4)
 	
-		Warning.Name = "Warning"
-		Warning.Parent = Notification
-		Warning.BackgroundTransparency = 1.000
-		Warning.Position = UDim2.new(0.0258302614, 0, 0.0897435844, 0)
-		Warning.Size = UDim2.new(0, 44, 0, 49)
-		Warning.Image = "rbxassetid://3944668821"
-		Warning.ImageColor3 = Color3.fromRGB(241, 196, 15)
-		Warning.ScaleType = Enum.ScaleType.Fit
+	screenGui.Name = "KatersNotify"
+	screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	
-		UICorner.CornerRadius = UDim.new(0, 20)
-		UICorner.Parent = Warning
+	instances.Frame_1.Parent = screenGui
+	instances.Frame_1.Name = 'Main'
 	
-		Title.Name = "Title"
-		Title.Parent = Notification
-		Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title.BackgroundTransparency = 1.000
-		Title.Position = UDim2.new(0.161, 0, 0.155, 0)
-		Title.Size = UDim2.new(0, 205, 0, 15)
-		Title.Text = TitleText
-		Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title.TextSize = 12.000
-		Title.TextStrokeTransparency = 0.500
-		Title.TextXAlignment = Enum.TextXAlignment.Left
 	
-		Description.Name = "Description"
-		Description.Parent = Notification
-		Description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Description.BackgroundTransparency = 1.000
-		Description.Position = UDim2.new(0.161, 0, 0.483, 0)
-		Description.Size = UDim2.new(0, 205, 0, 18)
-		Description.Text = Desc
-		Description.TextColor3 = Color3.fromRGB(199, 199, 199)
-		Description.TextSize = 12.000
-		Description.TextStrokeTransparency = 0.500
-		Description.TextXAlignment = Enum.TextXAlignment.Left
-		Notification:TweenPosition(UDim2.new(1, -400, 0, 75), "Out", "Sine", 0.35)
-		wait(0.35)
-		Line:TweenSize(UDim2.new(0, 450, 0, 4), "Out", "Linear", Delay)
-		wait(Delay)
-		Notification:TweenPosition(UDim2.new(1, 5, 0, 75), "Out", "Sine", 0.35)
-		wait(0.35)
-		Notification:Destroy()
+	instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
+	instances.Frame_1.BorderSizePixel = 0
+	instances.Frame_1.Position = UDim2.new(1, 0,0.509, 0)
+	instances.Frame_1.Size = UDim2.new(0, 331, 0, 61)
+	
+	instances.Frame_2.Parent = instances.Frame_1
+	instances.Frame_2.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
+	instances.Frame_2.Size = UDim2.new(0, 11, 0, 61)
+	instances.Frame_2.Name = 'Bar'
+	
+	instances.UICorner_1.Parent = instances.Frame_2
+	instances.UICorner_1.CornerRadius = UDim.new(0, 10)
+	
+	instances.UICorner_2.Parent = instances.Frame_1
+	instances.UICorner_2.CornerRadius = UDim.new(0, 7)
+	
+	instances.TextLabel_1.Parent = instances.Frame_1
+	instances.TextLabel_1.Font = Enum.Font[font]
+	instances.TextLabel_1.Text = title
+	instances.TextLabel_1.TextColor3 = Color3.new(1, 1, 1)
+	instances.TextLabel_1.TextSize = 14
+	instances.TextLabel_1.TextXAlignment = Enum.TextXAlignment.Left
+	instances.TextLabel_1.BackgroundColor3 = Color3.new(1, 1, 1)
+	instances.TextLabel_1.BackgroundTransparency = 1
+	instances.TextLabel_1.Position = UDim2.new(0.08849557489156723, 0, 0, 0)
+	instances.TextLabel_1.Size = UDim2.new(0, 201, 0, 28)
+	instances.TextLabel_1.Name = 'Title'
+	
+	instances.TextLabel_2.Parent = instances.Frame_1
+	instances.TextLabel_2.Font = Enum.Font[font2]
+	instances.TextLabel_2.Text = desc
+	instances.TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+	instances.TextLabel_2.TextSize = 13
+	instances.TextLabel_2.TextTruncate = Enum.TextTruncate.AtEnd
+	instances.TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+	instances.TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+	instances.TextLabel_2.BackgroundTransparency = 1
+	instances.TextLabel_2.Position = UDim2.new(0.08645028620958328, 0, 0.6040353178977966, 0)
+	instances.TextLabel_2.Size = UDim2.new(0, 191, 0, 9)
+	instances.TextLabel_2.Name = 'Description'
+	
+	instances.TextButton_1.Parent = instances.Frame_1
+	instances.TextButton_1.Font = Enum.Font.GothamSemibold
+	instances.TextButton_1.Text = 'X'
+	instances.TextButton_1.TextColor3 = Color3.new(1, 1, 1)
+	instances.TextButton_1.TextSize = 18
+	instances.TextButton_1.BackgroundColor3 = Color3.new(1, 1, 1)
+	instances.TextButton_1.BackgroundTransparency = 1
+	instances.TextButton_1.Position = UDim2.new(0.9070796370506287, 0, 0, 0)
+	instances.TextButton_1.Size = UDim2.new(0, 16, 0, 61)
+	instances.TextButton_1.Name = 'Close'
+	
+	instances.LocalScript_1.Parent = instances.TextButton_1
+	
+	instances.LocalScript_2.Parent = instances.Frame_1
+	
+	local DO_NOT_COPY_THIS_VARIABLE_001 = {}
+	local DO_NOT_COPY_THIS_VARIABLE_002 = require
+	
+	local require = function(object)
+		local module = DO_NOT_COPY_THIS_VARIABLE_001[object]
+	
+		if module then
+			return DO_NOT_COPY_THIS_VARIABLE_001[object]()
+		end
+	
+		return DO_NOT_COPY_THIS_VARIABLE_002(object)
+	end
+	
+	
+	
+	function Code_LocalScript_1() --LocalScript
+		local script = instances.LocalScript_1
+	
+		script.Parent.MouseButton1Down:Connect(function()
+		    script.Parent.Parent:TweenPosition(UDim2.new(50, 0,0,0),"InOut","Sine",7.2)
+			wait(2)
+			script.Parent.Parent.Parent:Destroy()
+		end)
+	end
+	coroutine.wrap(Code_LocalScript_1)()
+	
+	
+	function Code_LocalScript_2()
+		local script = instances.LocalScript_2
+		local newpos = UDim2.new(0.82, 0,0.507, 0)
+		
+		
+		script.Parent:TweenPosition(newpos,"InOut","Sine",0.5)
+	end
+	coroutine.wrap(Code_LocalScript_2)()
+	wait(visibletime)
+			instances.Frame_1:TweenPosition(UDim2.new(50,0,0,0),"InOut","Sine",7.2)
+			wait(2)
+			screenGui:Destroy()
+		
+		
+	
+		end)
 	end
 	
 	function KaterHubLib:Notification(titletext, desctext, btntext)
