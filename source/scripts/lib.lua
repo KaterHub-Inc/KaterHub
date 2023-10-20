@@ -48,7 +48,7 @@ function createBaseNotify()
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     
     local ToggleNotif = Instance.new("Frame")
-    ToggleNotif.Name = "DaToggle"
+    ToggleNotif.Name = "ToggleNotif"
     ToggleNotif.ZIndex = 5
     ToggleNotif.AnchorPoint = Vector2.new(1, 1)
     ToggleNotif.Visible = false
