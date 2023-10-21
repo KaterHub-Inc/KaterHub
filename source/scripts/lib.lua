@@ -2007,9 +2007,9 @@ function KaterHubLib:Window(text)
 		)
 
 		if img == "" then
-			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
+			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
 		end
 
 		if fs == false then
