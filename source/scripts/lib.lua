@@ -14,6 +14,10 @@ local user
 local tag
 local userinfo = {}
 
+local success, inviteData = pcall(function()
+	return HS:JSONDecode(SelfModules.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..invite, Method = "GET" }).Body)
+end)
+
 pcall(function()
 	userinfo = HttpService:JSONDecode(readfile("KaterHub-Data.json"));
 end)
@@ -2490,7 +2494,7 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
 		end
 
 		if fs == false then
