@@ -14,6 +14,10 @@ local user
 local tag
 local userinfo = {}
 
+local TS = game:GetService("TweenService")
+local HS = game:GetService("HttpService")
+local CG = game:GetService("CoreGui")
+
 local SelfModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
 }
