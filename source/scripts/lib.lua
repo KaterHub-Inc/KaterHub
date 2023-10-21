@@ -2206,7 +2206,7 @@ function KaterHubLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 36, 0, 36)
+		ServerIco.Size = UDim2.new(0, 50, 0, 50)
 		ServerIco.Image = ""
 
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
