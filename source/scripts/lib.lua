@@ -9,8 +9,8 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
-local TS = TweenService
-local HS = HttpService
+local TS = game:GetService("TweenService")
+local HS = game:GetService("HttpService")
 local CG = game:GetService("CoreGui")
 local pfp
 local user
@@ -106,10 +106,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
-Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Katerhub = Instance.new("ScreenGui")
+Katerhub.Name = "KaterHub-"..game.JobId
+Katerhub.Parent = game.CoreGui
+Katerhub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function KaterHubLib:Window(text)
 	local currentservertoggled = ""
@@ -138,7 +138,7 @@ function KaterHubLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = Discord
+	MainFrame.Parent = Katerhub
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -1136,19 +1136,19 @@ function KaterHubLib:Window(text)
 	SettingsTitle.TextSize = 11.000
 	SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-	DiscordInfo.Name = "DiscordInfo"
-	DiscordInfo.Parent = LeftFrame
-	DiscordInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	DiscordInfo.BackgroundTransparency = 1.000
-	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
-	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
-	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "We introduce players to the other side of Roblox."
-	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
-	DiscordInfo.TextSize = 13.000
-	DiscordInfo.TextWrapped = true
-	DiscordInfo.TextXAlignment = Enum.TextXAlignment.Left
-	DiscordInfo.TextYAlignment = Enum.TextYAlignment.Top
+	KaterhubInfo.Name = "KaterHubDesc"
+	KaterhubInfo.Parent = LeftFrame
+	KaterhubInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	KaterhubInfo.BackgroundTransparency = 1.000
+	KaterhubInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
+	KaterhubInfo.Size = UDim2.new(0, 133, 0, 44)
+	KaterhubInfo.Font = Enum.Font.Gotham
+	KaterhubInfo.Text = "We introduce players to the other side of Roblox."
+	KaterhubInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
+	KaterhubInfo.TextSize = 13.000
+	KaterhubInfo.TextWrapped = true
+	KaterhubInfo.TextXAlignment = Enum.TextXAlignment.Left
+	KaterhubInfo.TextYAlignment = Enum.TextYAlignment.Top
 
 	CurrentSettingOpen.Name = "CurrentSettingOpen"
 	CurrentSettingOpen.Parent = LeftFrame
