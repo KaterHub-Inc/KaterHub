@@ -546,7 +546,7 @@ function KaterHubLib:Window(text)
 	TextLabel.Position = UDim2.new(-0.0666666701, 0, 1.06666672, 0)
 	TextLabel.Size = UDim2.new(0, 34, 0, 22)
 	TextLabel.Font = Enum.Font.GothamSemibold
-	TextLabel.Text = "rightctrl"
+	TextLabel.Text = "close"
 	TextLabel.TextColor3 = Color3.fromRGB(113, 117, 123)
 	TextLabel.TextSize = 11.000
 
@@ -817,7 +817,7 @@ function KaterHubLib:Window(text)
 		Text2.Position = UDim2.new(-0.000594122568, 0, 0.141587839, 0)
 		Text2.Size = UDim2.new(0, 346, 0, 63)
 		Text2.Font = Enum.Font.Gotham
-		Text2.Text = "Enter your new profile in a Roblox decal link."
+		Text2.Text = "Enter your new profile picture link."
 		Text2.TextColor3 = Color3.fromRGB(171, 172, 176)
 		Text2.TextSize = 14.000
 
@@ -1143,7 +1143,7 @@ function KaterHubLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "Stable 1.0.0 (00001)  Host 0.0.0.1                By Kater#0001    "
+	DiscordInfo.Text = "We introduce players to the other side of Roblox."
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
