@@ -2184,6 +2184,7 @@ function KaterHubLib:Window(text)
 		local ServerIco = Instance.new("ImageLabel")
 		local ServerWhiteFrame = Instance.new("Frame")
 		local ServerWhiteFrameCorner = Instance.new("UICorner")
+		local ServerIcoCorner = Instance.new("UICorner")
 
 		Server.Name = text .. "Server"
 		Server.Parent = ServersHold
@@ -2208,6 +2209,10 @@ function KaterHubLib:Window(text)
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
 		ServerIco.Size = UDim2.new(0, 50, 0, 50)
 		ServerIco.Image = ""
+
+		ServerIcoCorner.CornerRadius = UDim.new(1, 0)
+		ServerIcoCorner.Name = "ServerIcoCorner"
+		ServerIcoCorner.Parent = ServerIco
 
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
