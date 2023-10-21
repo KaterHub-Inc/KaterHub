@@ -1689,6 +1689,7 @@ function KaterHubLib:Window(text)
 		local Server = Instance.new("TextButton")
 		local ServerBtnCorner = Instance.new("UICorner")
 		local ServerIco = Instance.new("ImageLabel")
+		local ServerIcoCorner = Instance.new("UICorner")
 		local ServerWhiteFrame = Instance.new("Frame")
 		local ServerWhiteFrameCorner = Instance.new("UICorner")
 
@@ -1713,9 +1714,13 @@ function KaterHubLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 26, 0, 26)
+		ServerIco.Size = UDim2.new(0, 49, 0, 49)
 		ServerIco.Image = ""
 
+		ServerIcoCorner.CornerRadius = UDim.new(0, 10)
+		ServerIcoCorner.Name = "ServerIcoCorner"
+		ServerBtnCorner.Parent = ServerIco
+		
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
 		ServerWhiteFrame.AnchorPoint = Vector2.new(0.5, 0.5)
