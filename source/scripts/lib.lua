@@ -2207,10 +2207,10 @@ function KaterHubLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 50, 0, 50)
+		ServerIco.Size = UDim2.new(0, 49, 0, 49)
 		ServerIco.Image = ""
 
-		ServerIcoCorner.CornerRadius = UDim.new(1, 7)
+		ServerIcoCorner.CornerRadius = UDim.new(0, 13)
 		ServerIcoCorner.Name = "ServerIcoCorner"
 		ServerIcoCorner.Parent = ServerIco
 
