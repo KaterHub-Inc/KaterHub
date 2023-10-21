@@ -2210,7 +2210,7 @@ function KaterHubLib:Window(text)
 		ServerIco.Size = UDim2.new(0, 50, 0, 50)
 		ServerIco.Image = ""
 
-		ServerIcoCorner.CornerRadius = UDim.new(0, 15)
+		ServerIcoCorner.CornerRadius = UDim.new(1, 15)
 		ServerIcoCorner.Name = "ServerIcoCorner"
 		ServerIcoCorner.Parent = ServerIco
 
