@@ -17,14 +17,6 @@ local user
 local tag
 local userinfo = {}
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
-Library.DefaultColor = Color3.fromRGB(0,255,0)
-
-Library:Notification({
-    Text = "Envixity Scripts On Top! Script Executed",
-    Duration = 3
-})
-
 local SelfModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
 }
