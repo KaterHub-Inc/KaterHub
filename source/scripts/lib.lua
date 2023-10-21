@@ -888,9 +888,9 @@ function KaterHubLib:Window(text)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
 			pfp = source.Functions.LoadCustomAsset(tostring(AvatarTextbox.Text))
+			SaveInfo()
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
-			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
 			TweenService:Create(
