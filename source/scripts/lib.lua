@@ -884,7 +884,7 @@ function KaterHubLib:Window(text)
 		end)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
-			pfp = tostring(AvatarTextbox.Text)
+			pfp = SelfModules.Functions.LoadCustomAsset(tostring(AvatarTextbox.Text))
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
 			SaveInfo()
