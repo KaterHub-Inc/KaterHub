@@ -107,7 +107,7 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Katerhub = Instance.new("ScreenGui")
-Katerhub.Name = "KaterHub-"..game.JobId
+Katerhub.Name = "KaterHub-"..invite
 Katerhub.Parent = game.CoreGui
 Katerhub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1136,7 +1136,7 @@ function KaterHubLib:Window(text)
 	SettingsTitle.TextSize = 11.000
 	SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-	KaterhubInfo.Name = "KaterHubDesc"
+	KaterhubInfo.Name = "Description"
 	KaterhubInfo.Parent = LeftFrame
 	KaterhubInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	KaterhubInfo.BackgroundTransparency = 1.000
