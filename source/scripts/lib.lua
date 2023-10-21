@@ -34,7 +34,9 @@ local success, inviteData = pcall(function()
 end)
 
 pcall(function()
-	makefolder("KaterHub")
+	if not isfolder("KaterHub") then
+		makefolder("KaterHub")
+	end
 	userinfo = HttpService:JSONDecode(readfile("KaterHub/KaterHub-Data.json"));
 end)
 
