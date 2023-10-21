@@ -1719,7 +1719,7 @@ function KaterHubLib:Window(text)
 
 		ServerIcoCorner.CornerRadius = UDim.new(0, 10)
 		ServerIcoCorner.Name = "ServerIcoCorner"
-		ServerBtnCorner.Parent = ServerIco
+		ServerIcoCorner.Parent = ServerIco
 		
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
