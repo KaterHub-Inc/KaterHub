@@ -17,12 +17,12 @@ local user
 local tag
 local userinfo = {}
 
-local SelfModules = {
-	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
+local source = {
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/KaterHub/main/source/scripts/functions.lua"))()
 }
 
 local success, inviteData = pcall(function()
-	return HS:JSONDecode(SelfModules.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..invite, Method = "GET" }).Body)
+	return HS:JSONDecode(source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..invite, Method = "GET" }).Body)
 end)
 
 pcall(function()
@@ -887,7 +887,7 @@ function KaterHubLib:Window(text)
 		end)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
-			pfp = SelfModules.Functions.LoadCustomAsset(tostring(AvatarTextbox.Text))
+			pfp = source.Functions.LoadCustomAsset(tostring(AvatarTextbox.Text))
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
 			SaveInfo()
@@ -2017,7 +2017,7 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
+			ServerIco.Image = source.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
 		end
 
 		if fs == false then
