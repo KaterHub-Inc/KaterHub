@@ -1,22 +1,21 @@
 local KaterHubLib = {}
+local katerhubadmins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))()
+local katerhubstars = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
+local invite = tostring(game:HttpGet("https://pastebin.com/raw/47UfT4rk"))
+local version = tostring(game:HttpGet("https://pastebin.com/raw/kYHVqf0Y"))
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
-local katerhubadmins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))()
-local katerhubstars = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
-local invite = tostring(game:HttpGet("https://pastebin.com/raw/47UfT4rk"))
-local version = tostring(game:HttpGet("https://pastebin.com/raw/kYHVqf0Y"))
+local TS = TweenService
+local HS = HttpService
+local CG = game:GetService("CoreGui")
 local pfp
 local user
 local tag
 local userinfo = {}
-
-local TS = game:GetService("TweenService")
-local HS = game:GetService("HttpService")
-local CG = game:GetService("CoreGui")
 
 local SelfModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
@@ -45,377 +44,10 @@ else
 end
 
 local function SaveInfo()
-	userinfo["picture"] = pfp
+	userinfo["pfp"] = pfp
 	userinfo["user"] = user
-	userinfo["discriminator"] = tag
+	userinfo["tag"] = tag
 	writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
-end
-
-function createBaseNotify()
-    if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("KatersnotificationHolder") then
-        return game:GetService("Players").LocalPlayer.PlayerGui.KatersnotificationHolder
-    end
-    
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    
-    local ToggleNotif = Instance.new("Frame")
-    ToggleNotif.Name = "ToggleNotif"
-    ToggleNotif.ZIndex = 5
-    ToggleNotif.AnchorPoint = Vector2.new(1, 1)
-    ToggleNotif.Visible = false
-    ToggleNotif.Size = UDim2.new(0, 291, 0, 56)
-    ToggleNotif.Position = UDim2.new(1, 0, 1, 0)
-    ToggleNotif.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-    ToggleNotif.Parent = ScreenGui
-    
-    local UiCorner = Instance.new("UICorner")
-    UiCorner.Name = "UiCorner"
-    UiCorner.Parent = ToggleNotif
-    
-    local Dropshadow = Instance.new("UIStroke")
-    Dropshadow.Name = "Dropshadow"
-    Dropshadow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    Dropshadow.Transparency = 0.8
-    Dropshadow.Thickness = 2
-    Dropshadow.Color = Color3.fromRGB(20, 20, 20)
-    Dropshadow.Parent = ToggleNotif
-    
-    local SepVertical = Instance.new("Frame")
-    SepVertical.Name = "SepVertical"
-    SepVertical.Size = UDim2.new(0, 2, 0, 56)
-    SepVertical.BackgroundTransparency = 0.5
-    SepVertical.Position = UDim2.new(0.7423077, 0, 0, 0)
-    SepVertical.BorderSizePixel = 0
-    SepVertical.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
-    SepVertical.Parent = ToggleNotif
-    
-    local SepHorizontal = Instance.new("Frame")
-    SepHorizontal.Name = "SepHorizontal"
-    SepHorizontal.Size = UDim2.new(0, 72, 0, 2)
-    SepHorizontal.BackgroundTransparency = 0.5
-    SepHorizontal.Position = UDim2.new(0.75, 0, 0.4464286, 2)
-    SepHorizontal.BorderSizePixel = 0
-    SepHorizontal.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
-    SepHorizontal.Parent = ToggleNotif
-    
-    local Title = Instance.new("TextLabel")
-    Title.Name = "Title"
-    Title.Size = UDim2.new(0, 216, 0, 19)
-    Title.BackgroundTransparency = 1
-    Title.BorderSizePixel = 0
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Title.FontSize = Enum.FontSize.Size14
-    Title.TextSize = 14
-    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.Font = Enum.Font.SourceSans
-    Title.Parent = ToggleNotif
-    
-    local Paragraph = Instance.new("TextLabel")
-    Paragraph.Name = "Paragraph"
-    Paragraph.Size = UDim2.new(0, 218, 0, 37)
-    Paragraph.BackgroundTransparency = 1
-    Paragraph.Position = UDim2.new(0, 0, 0.3392857, 0)
-    Paragraph.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Paragraph.FontSize = Enum.FontSize.Size14
-    Paragraph.TextSize = 14
-    Paragraph.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Paragraph.Text = ""
-    Paragraph.TextYAlignment = Enum.TextYAlignment.Top
-    Paragraph.TextWrapped = true
-    Paragraph.Font = Enum.Font.SourceSans
-    Paragraph.TextWrap = true
-    Paragraph.TextXAlignment = Enum.TextXAlignment.Left
-    Paragraph.Parent = ToggleNotif
-    
-    local UIPadding = Instance.new("UIPadding")
-    UIPadding.PaddingLeft = UDim.new(0, 10)
-    UIPadding.PaddingRight = UDim.new(0, 5)
-    UIPadding.Parent = Paragraph
-    
-    local True = Instance.new("TextButton")
-    True.Name = "True"
-    True.Size = UDim2.new(0, 72, 0, 27)
-    True.BackgroundTransparency = 1
-    True.Position = UDim2.new(0.75, 0, 0, 0)
-    True.BorderSizePixel = 0
-    True.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    True.FontSize = Enum.FontSize.Size14
-    True.TextSize = 14
-    True.TextColor3 = Color3.fromRGB(255, 255, 255)
-    True.Text = "Yes"
-    True.Font = Enum.Font.SourceSans
-    True.Parent = ToggleNotif
-    
-    local False = Instance.new("TextButton")
-    False.Name = "False"
-    False.Size = UDim2.new(0, 72, 0, 27)
-    False.BackgroundTransparency = 1
-    False.Position = UDim2.new(0.75, 0, 0.5178571, 0)
-    False.BorderSizePixel = 0
-    False.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    False.FontSize = Enum.FontSize.Size14
-    False.TextSize = 14
-    False.TextColor3 = Color3.fromRGB(255, 255, 255)
-    False.Text = "No"
-    False.Font = Enum.Font.SourceSans
-    False.Parent = ToggleNotif
-    
-    local LocalScript = Instance.new("LocalScript")
-    LocalScript.Parent = ScreenGui
-    
-    local DefaultNotif = Instance.new("Frame")
-    DefaultNotif.Name = "DefaultNotif"
-    DefaultNotif.ZIndex = 5
-    DefaultNotif.AnchorPoint = Vector2.new(1, 1)
-    DefaultNotif.Visible = false
-    DefaultNotif.Size = UDim2.new(0, 291, 0, 56)
-    DefaultNotif.Position = UDim2.new(1, 0, 0.9999999, 0)
-    DefaultNotif.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-    DefaultNotif.Parent = ScreenGui
-    
-    local UiCorner1 = Instance.new("UICorner")
-    UiCorner1.Name = "UiCorner"
-    UiCorner1.Parent = DefaultNotif
-    
-    local Dropshadow1 = Instance.new("UIStroke")
-    Dropshadow1.Name = "Dropshadow"
-    Dropshadow1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    Dropshadow1.Transparency = 0.8
-    Dropshadow1.Thickness = 2
-    Dropshadow1.Color = Color3.fromRGB(20, 20, 20)
-    Dropshadow1.Parent = DefaultNotif
-    
-    local Title1 = Instance.new("TextLabel")
-    Title1.Name = "Title"
-    Title1.Size = UDim2.new(0, 291, 0, 19)
-    Title1.BackgroundTransparency = 1
-    Title1.BorderSizePixel = 0
-    Title1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Title1.FontSize = Enum.FontSize.Size14
-    Title1.TextSize = 14
-    Title1.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title1.Font = Enum.Font.SourceSans
-    Title1.Parent = DefaultNotif
-    
-    local Paragraph1 = Instance.new("TextLabel")
-    Paragraph1.Name = "Paragraph"
-    Paragraph1.Size = UDim2.new(0, 291, 0, 37)
-    Paragraph1.BackgroundTransparency = 1
-    Paragraph1.Position = UDim2.new(0, 0, 0.3392857, 0)
-    Paragraph1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Paragraph1.FontSize = Enum.FontSize.Size14
-    Paragraph1.TextSize = 14
-    Paragraph1.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Paragraph1.Text = ""
-    Paragraph1.TextYAlignment = Enum.TextYAlignment.Top
-    Paragraph1.TextWrapped = true
-    Paragraph1.Font = Enum.Font.SourceSans
-    Paragraph1.TextWrap = true
-    Paragraph1.TextXAlignment = Enum.TextXAlignment.Left
-    Paragraph1.Parent = DefaultNotif
-    
-    local UIPadding1 = Instance.new("UIPadding")
-    UIPadding1.PaddingLeft = UDim.new(0, 10)
-    UIPadding1.PaddingRight = UDim.new(0, 5)
-    UIPadding1.Parent = Paragraph1
-    
-    if syn then
-        syn.protect_gui(ScreenGui)
-    end
-    
-    ScreenGui.Parent = game:GetService("Players").LocalPlayer.PlayerGui
-    return ScreenGui
-end
-
-notificationHolder = createBaseNotify()
-notifAmount = 0
-removedPos = nil
-
-function KaterHubLib:CreatePromptNotif(args)
-	args = args or {}
-	args.TweenSpeed = args.TweenSpeed or 1
-	args.TweenInSpeed = args.TweenInSpeed or args.TweenSpeed
-	args.TweenOutSpeed = args.TweenOutSpeed or args.TweenSpeed
-	args.TweenVerticalSpeed = args.TweenVerticalSpeed or args.TweenSpeed
-	
-	args.Title = args.Title or "Title"
-	args.Text = args.Text or "Text"
-	
-	args.TrueText = args.TrueText or "Yes"
-	args.FalseText = args.FalseText or "No"
-	
-	args.Duration = args.Duration or 5
-	args.Callback = args.Callback or function() warn("No callback for notif") end
-	
-	notifAmount = notifAmount + 1
-	
-	local track = notifAmount
-	local notifNum = notifAmount
-	
-	local doesExist = true
-	local notif = notificationHolder.ToggleNotif:Clone()
-	local removed = false
-	
-	notif.Parent = notificationHolder
-	notif.Visible = true
-	notif.Position = UDim2.new(1, 300, 1, -5)
-	
-	notif.Transparency = 0.05
-	
-	notif.True.Text = args.TrueText
-	notif.False.Text = args.FalseText
-	
-	task.spawn(function()
-		task.wait(args.Duration + args.TweenInSpeed)
-		doesExist = false
-	end)
-	
-	notif.True.MouseButton1Click:Connect(function()
-		doesExist = false
-		removed = true
-		notifAmount = notifAmount - 1
-		removedPos = notif.Position.Y.Offset	
-
-		pcall(args.Callback, true)
-	end)
-	
-	
-	notif.False.MouseButton1Click:Connect(function()
-		doesExist = false
-		removed = true
-		notifAmount = notifAmount - 1
-		removedPos = notif.Position.Y.Offset	
-		
-		pcall(args.Callback, false)
-	end)
-	
-	notif.Paragraph.Text = args.Text
-	notif.Title.Text = args.Title
-
-	notif:TweenPosition(UDim2.new(1, -5, 1, -5), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenInSpeed)
-	
-	task.spawn(function()
-		local originalPos = notif.Position
-		while doesExist and task.wait() do	
-			local pos = notif.Position
-			
-			if notifAmount > track then
-				notif:TweenPosition(UDim2.new(1, -5, 1, originalPos.Y.Offset - (65 * (notifAmount - notifNum))), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenVerticalSpeed, true)
-				track = track + 1
-			end
-			
-			if notifAmount < track then
-				if removedPos > pos.Y.Offset then
-					notif:TweenPosition(UDim2.new(1, -5, 1, originalPos.Y.Offset - (65 * (notifAmount - notifNum))), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenVerticalSpeed, true)
-				else
-					notifNum = notifNum - 1
-				end
-				track = track - 1
-			end
-		end
-		
-		local pos = notif.Position
-		
-		if removed == false then
-			notifAmount = notifAmount - 1
-			removedPos = notif.Position.Y.Offset
-		end
-		
-		notif:TweenPosition(UDim2.new(1, 300, 1, pos.Y.Offset), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenOutSpeed, true)
-		task.wait(args.TweenOutSpeed)
-		notif:Destroy()
-	end)
-end
-
-function KaterHubLib:CreateDefaultNotif(args)
-	args = args or {}
-	
-	
-	args.TweenSpeed = args.TweenSpeed or 1
-	args.TweenInSpeed = args.TweenInSpeed or args.TweenSpeed
-	args.TweenOutSpeed = args.TweenOutSpeed or args.TweenSpeed
-	args.TweenVerticalSpeed = args.TweenVerticalSpeed or args.TweenSpeed
-	
-	args.Title = args.Title or "Title"
-	args.Text = args.Text or "Text"
-	
-	args.Duration = args.Duration or 5
-	
-	---- arg defining ^
-	
-    
-	
-	notifAmount = notifAmount + 1
-	
-	local track = notifAmount
-	local notifNum = notifAmount
-	
-	local removed = false
-	local doesExist = true
-	local notif = notificationHolder.DefaultNotif:Clone()
-
-	notif.Parent = notificationHolder
-	notif.Visible = true
-	notif.Position = UDim2.new(1, 300, 1, -5)
-	
-    notif.Transparency = 0.05
-	
-	notif.InputBegan:Connect(function(InputObject)
-        if InputObject.UserInputType == Enum.UserInputType.MouseButton1 then
-    		task.spawn(function()
-    			local tweenInfo = TweenInfo.new(0.5,Enum.EasingStyle.Linear,Enum.EasingDirection.Out,0, false,0)
-    			game:GetService("TweenService"):Create(notif, tweenInfo, {Transparency = 0.8}):Play()
-    		end)
-            doesExist = false
-		    removed = true
-		    notifAmount = notifAmount - 1
-		    removedPos = notif.Position.Y.Offset
-        end
-    end)
-	
-	task.spawn(function()
-		task.wait(args.Duration + args.TweenInSpeed)
-		doesExist = false
-	end)
-	
-	notif.Paragraph.Text = args.Text
-	notif.Title.Text = args.Title
-
-	notif:TweenPosition(UDim2.new(1, -5, 1, -5), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenInSpeed)
-	
-	task.spawn(function()
-		local originalPos = notif.Position
-		while doesExist and task.wait() do	
-			local pos = notif.Position
-			
-			if notifAmount > track then
-				notif:TweenPosition(UDim2.new(1, -5, 1, originalPos.Y.Offset - (65 * (notifAmount - notifNum))), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenVerticalSpeed, true)
-				track = track + 1
-			end
-			
-			if notifAmount < track then
-				if removedPos > pos.Y.Offset then
-					notif:TweenPosition(UDim2.new(1, -5, 1, originalPos.Y.Offset - (65 * (notifAmount - notifNum))), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenVerticalSpeed, true)
-				else
-					notifNum = notifNum - 1
-				end
-				track = track - 1
-			end
-		end
-		
-		local pos = notif.Position
-		
-		if removed == false then 
-    	    notifAmount = notifAmount - 1
-    		removedPos = notif.Position.Y.Offset
-    	end
-		
-		
-		notif:TweenPosition(UDim2.new(1, 300, 1, pos.Y.Offset), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, args.TweenOutSpeed, true)
-		task.wait(args.TweenOutSpeed)
-		notif:Destroy()
-	end)
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -474,10 +106,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local KHUI = Instance.new("ScreenGui")
-KHUI.Name = "KaterHub-"..game.Players.LocalPlayer.AccountAge.."-"..game.Players.LocalPlayer.UserId
-KHUI.Parent = game.CoreGui
-KHUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Discord = Instance.new("ScreenGui")
+Discord.Name = "Discord"
+Discord.Parent = game.CoreGui
+Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function KaterHubLib:Window(text)
 	local currentservertoggled = ""
@@ -506,7 +138,7 @@ function KaterHubLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = KHUI
+	MainFrame.Parent = Discord
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -790,7 +422,7 @@ function KaterHubLib:Window(text)
 	local MyAccountBtnCorner = Instance.new("UICorner")
 	local MyAccountBtnTitle = Instance.new("TextLabel")
 	local SettingsTitle = Instance.new("TextLabel")
-	local KHUIInfo = Instance.new("TextLabel")
+	local DiscordInfo = Instance.new("TextLabel")
 	local CurrentSettingOpen = Instance.new("TextLabel")
 
 	SettingsFrame.Name = "SettingsFrame"
@@ -914,7 +546,7 @@ function KaterHubLib:Window(text)
 	TextLabel.Position = UDim2.new(-0.0666666701, 0, 1.06666672, 0)
 	TextLabel.Size = UDim2.new(0, 34, 0, 22)
 	TextLabel.Font = Enum.Font.GothamSemibold
-	TextLabel.Text = "close"
+	TextLabel.Text = "rightctrl"
 	TextLabel.TextColor3 = Color3.fromRGB(113, 117, 123)
 	TextLabel.TextSize = 11.000
 
@@ -1504,19 +1136,19 @@ function KaterHubLib:Window(text)
 	SettingsTitle.TextSize = 11.000
 	SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-	KHUIInfo.Name = "KHUIInfo"
-	KHUIInfo.Parent = LeftFrame
-	KHUIInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	KHUIInfo.BackgroundTransparency = 1.000
-	KHUIInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
-	KHUIInfo.Size = UDim2.new(0, 133, 0, 44)
-	KHUIInfo.Font = Enum.Font.Gotham
-	KHUIInfo.Text = "We introduce players to the other side of Roblox."
-	KHUIInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
-	KHUIInfo.TextSize = 13.000
-	KHUIInfo.TextWrapped = true
-	KHUIInfo.TextXAlignment = Enum.TextXAlignment.Left
-	KHUIInfo.TextYAlignment = Enum.TextYAlignment.Top
+	DiscordInfo.Name = "DiscordInfo"
+	DiscordInfo.Parent = LeftFrame
+	DiscordInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DiscordInfo.BackgroundTransparency = 1.000
+	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
+	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
+	DiscordInfo.Font = Enum.Font.Gotham
+	DiscordInfo.Text = "Stable 1.0.0 (00001)  Host 0.0.0.1                By Kater#0001    "
+	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
+	DiscordInfo.TextSize = 13.000
+	DiscordInfo.TextWrapped = true
+	DiscordInfo.TextXAlignment = Enum.TextXAlignment.Left
+	DiscordInfo.TextYAlignment = Enum.TextYAlignment.Top
 
 	CurrentSettingOpen.Name = "CurrentSettingOpen"
 	CurrentSettingOpen.Parent = LeftFrame
@@ -1907,131 +1539,6 @@ function KaterHubLib:Window(text)
 		end)
 		
 	end)
-
-	function KaterHubLib:Msg(title,desc,font,font2,visibletime)
-	pcall(function()
-	local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-	
-	local instances = {
-		["UICorner_1"] = Instance.new("UICorner"),
-		["LocalScript_1"] = Instance.new("LocalScript"),
-		["Frame_2"] = Instance.new("Frame"),
-		["UICorner_2"] = Instance.new("UICorner"),
-		["TextLabel_1"] = Instance.new("TextLabel"),
-		["Frame_1"] = Instance.new("Frame"),
-		["TextLabel_2"] = Instance.new("TextLabel"),
-		["LocalScript_2"] = Instance.new("LocalScript"),
-		["TextButton_1"] = Instance.new("TextButton"),
-	}
-	
-	
-	screenGui.Name = "KatersNotify"
-	screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	
-	instances.Frame_1.Parent = screenGui
-	instances.Frame_1.Name = 'Main'
-	
-	
-	instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
-	instances.Frame_1.BorderSizePixel = 0
-	instances.Frame_1.Position = UDim2.new(1, 0,0.509, 0)
-	instances.Frame_1.Size = UDim2.new(0, 331, 0, 61)
-	
-	instances.Frame_2.Parent = instances.Frame_1
-	instances.Frame_2.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
-	instances.Frame_2.Size = UDim2.new(0, 11, 0, 61)
-	instances.Frame_2.Name = 'Bar'
-	
-	instances.UICorner_1.Parent = instances.Frame_2
-	instances.UICorner_1.CornerRadius = UDim.new(0, 10)
-	
-	instances.UICorner_2.Parent = instances.Frame_1
-	instances.UICorner_2.CornerRadius = UDim.new(0, 7)
-	
-	instances.TextLabel_1.Parent = instances.Frame_1
-	instances.TextLabel_1.Font = Enum.Font[font]
-	instances.TextLabel_1.Text = title
-	instances.TextLabel_1.TextColor3 = Color3.new(1, 1, 1)
-	instances.TextLabel_1.TextSize = 14
-	instances.TextLabel_1.TextXAlignment = Enum.TextXAlignment.Left
-	instances.TextLabel_1.BackgroundColor3 = Color3.new(1, 1, 1)
-	instances.TextLabel_1.BackgroundTransparency = 1
-	instances.TextLabel_1.Position = UDim2.new(0.08849557489156723, 0, 0, 0)
-	instances.TextLabel_1.Size = UDim2.new(0, 201, 0, 28)
-	instances.TextLabel_1.Name = 'Title'
-	
-	instances.TextLabel_2.Parent = instances.Frame_1
-	instances.TextLabel_2.Font = Enum.Font[font2]
-	instances.TextLabel_2.Text = desc
-	instances.TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
-	instances.TextLabel_2.TextSize = 13
-	instances.TextLabel_2.TextTruncate = Enum.TextTruncate.AtEnd
-	instances.TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-	instances.TextLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
-	instances.TextLabel_2.BackgroundTransparency = 1
-	instances.TextLabel_2.Position = UDim2.new(0.08645028620958328, 0, 0.6040353178977966, 0)
-	instances.TextLabel_2.Size = UDim2.new(0, 191, 0, 9)
-	instances.TextLabel_2.Name = 'Description'
-	
-	instances.TextButton_1.Parent = instances.Frame_1
-	instances.TextButton_1.Font = Enum.Font.GothamSemibold
-	instances.TextButton_1.Text = 'X'
-	instances.TextButton_1.TextColor3 = Color3.new(1, 1, 1)
-	instances.TextButton_1.TextSize = 18
-	instances.TextButton_1.BackgroundColor3 = Color3.new(1, 1, 1)
-	instances.TextButton_1.BackgroundTransparency = 1
-	instances.TextButton_1.Position = UDim2.new(0.9070796370506287, 0, 0, 0)
-	instances.TextButton_1.Size = UDim2.new(0, 16, 0, 61)
-	instances.TextButton_1.Name = 'Close'
-	
-	instances.LocalScript_1.Parent = instances.TextButton_1
-	
-	instances.LocalScript_2.Parent = instances.Frame_1
-	
-	local DO_NOT_COPY_THIS_VARIABLE_001 = {}
-	local DO_NOT_COPY_THIS_VARIABLE_002 = require
-	
-	local require = function(object)
-		local module = DO_NOT_COPY_THIS_VARIABLE_001[object]
-	
-		if module then
-			return DO_NOT_COPY_THIS_VARIABLE_001[object]()
-		end
-	
-		return DO_NOT_COPY_THIS_VARIABLE_002(object)
-	end
-	
-	
-	
-	function Code_LocalScript_1() --LocalScript
-		local script = instances.LocalScript_1
-	
-		script.Parent.MouseButton1Down:Connect(function()
-		    script.Parent.Parent:TweenPosition(UDim2.new(50, 0,0,0),"InOut","Sine",7.2)
-			wait(2)
-			script.Parent.Parent.Parent:Destroy()
-		end)
-	end
-	coroutine.wrap(Code_LocalScript_1)()
-	
-	
-	function Code_LocalScript_2()
-		local script = instances.LocalScript_2
-		local newpos = UDim2.new(0.82, 0,0.507, 0)
-		
-		
-		script.Parent:TweenPosition(newpos,"InOut","Sine",0.5)
-	end
-	coroutine.wrap(Code_LocalScript_2)()
-	wait(visibletime)
-			instances.Frame_1:TweenPosition(UDim2.new(50,0,0,0),"InOut","Sine",7.2)
-			wait(2)
-			screenGui:Destroy()
-		
-		
-	
-		end)
-	end
 	
 	function KaterHubLib:Notification(titletext, desctext, btntext)
 		local NotificationHolderMain = Instance.new("TextButton")
@@ -2184,7 +1691,6 @@ function KaterHubLib:Window(text)
 		local ServerIco = Instance.new("ImageLabel")
 		local ServerWhiteFrame = Instance.new("Frame")
 		local ServerWhiteFrameCorner = Instance.new("UICorner")
-		local ServerIcoCorner = Instance.new("UICorner")
 
 		Server.Name = text .. "Server"
 		Server.Parent = ServersHold
@@ -2207,12 +1713,8 @@ function KaterHubLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 49, 0, 49)
+		ServerIco.Size = UDim2.new(0, 26, 0, 26)
 		ServerIco.Image = ""
-
-		ServerIcoCorner.CornerRadius = UDim.new(0, 10)
-		ServerIcoCorner.Name = "ServerIcoCorner"
-		ServerIcoCorner.Parent = ServerIco
 
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
@@ -2505,9 +2007,9 @@ function KaterHubLib:Window(text)
 		)
 
 		if img == "" then
-			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
-		else
 			Server.Text = string.sub(text, 1, 1)
+		else
+			ServerIco.Image = img
 		end
 
 		if fs == false then
