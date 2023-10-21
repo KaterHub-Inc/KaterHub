@@ -17,6 +17,14 @@ local user
 local tag
 local userinfo = {}
 
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(0,255,0)
+
+Library:Notification({
+    Text = "Envixity Scripts On Top! Script Executed",
+    Duration = 3
+})
+
 local SelfModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
 }
@@ -26,7 +34,8 @@ local success, inviteData = pcall(function()
 end)
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("KaterHub-Data.json"));
+	makefolder("KaterHub")
+	userinfo = HttpService:JSONDecode(readfile("KaterHub/KaterHub-Data.json"));
 end)
 
 if table.find(katerhubadmins, game.Players.LocalPlayer.UserId) then
@@ -47,7 +56,7 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("KaterHub-Data.json", HttpService:JSONEncode(userinfo));
+	writefile("KaterHub/KaterHub-Data.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
