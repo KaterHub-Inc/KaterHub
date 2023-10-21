@@ -2506,8 +2506,10 @@ function KaterHubLib:Window(text)
 
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
-		else
+		elseif img = "katerhub" then
 			ServerIco.Image = SelfModules.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
+		else
+			ServerIco.Image = img
 		end
 
 		if fs == false then
