@@ -33,17 +33,17 @@ pcall(function()
 end)
 
 if table.find(katerhubadmins, game.Players.LocalPlayer.UserId) then
-	pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName.." 👑"
-	tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
+	tag = userinfo["tag"] or tostring(math.random(1000,9999))
 elseif table.find(katerhubstars, game.Players.LocalPlayer.UserId) then
-	pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName.." ⭐"
-	tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
+	tag = userinfo["tag"] or tostring(math.random(1000,9999))
 else
-	pfp = userinfo["picture"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName
-	tag = userinfo["discriminator"] or tostring(math.random(1000,9999))
+	tag = userinfo["tag"] or tostring(math.random(1000,9999))
 end
 
 local function SaveInfo()
