@@ -16,6 +16,7 @@ discord.gg/gv8TGUxDzU
 --- Updated Source
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/KaterHub/main/main.lua"))()
 ```
+![GitHub contributors](https://img.shields.io/github/contributors/Colin4President/KaterHub)
 
 # Premium
 Remember you can only use those commands on players that executed our script in your lobby/game!
