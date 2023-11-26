@@ -23,8 +23,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/Kater
 <div align="left">
   <a href="https://github.com/Colin4President/KaterHub" target="_blank"><img src="https://img.shields.io/github/contributors/Colin4President/KaterHub"></img></a>
 </div>
-
-# Premium
+<div align="center">
+  <h2>Premium</h2>
+</div>
 Remember you can only use those commands on players that executed our script in your lobby/game!
 
 + adds a emoji to your name. [⭐]
