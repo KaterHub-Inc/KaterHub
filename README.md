@@ -1,6 +1,6 @@
 ![Icon](https://colin4president.github.io/KaterHub/source/png/logo.png)
 # 
-![Static Badge](https://img.shields.io/badge/Founder\Scripter-Colin4President-blue) ![Static Badge](https://img.shields.io/badge/Moderator-Drills-red) ![Static Badge](https://img.shields.io/badge/Supporter-.Loveri-green)
+![Static Badge](https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue) ![Static Badge](https://img.shields.io/badge/Moderator-Drills-red) ![Static Badge](https://img.shields.io/badge/Supporter-.Loveri-green)
 
 ```lua
 --[[
