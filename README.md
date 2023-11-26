@@ -1,7 +1,7 @@
 ![Icon](https://colin4president.github.io/KaterHub/source/png/logo.png)
-![Static Badge](https://img.shields.io/badge/yeah-ye)
-![Static Badge](https://img.shields.io/badge/yeah-ye)
 # 
+![Static Badge](https://img.shields.io/badge/yeah-ye) ![Static Badge](https://img.shields.io/badge/yeah-ye) ![Static Badge](https://img.shields.io/badge/yeah-ye)
+
 ```lua
 --[[
 ██╗  ██╗ █████╗ ████████╗███████╗██████╗     ██╗  ██╗██╗   ██╗██████╗ 
