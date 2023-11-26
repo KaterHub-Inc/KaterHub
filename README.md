@@ -26,6 +26,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/Kater
 <div align="center">
   <h2>Premium</h2>
   <h3>Remember you can only use those commands on players that executed our script in your lobby/game!</h3>
+  <h2> </h2>
 </div>
 
 + adds a emoji to your name. [⭐]
