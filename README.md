@@ -22,3 +22,7 @@ example: :bring [USERNAME] or "." = everyone
 :kick
 ```
 (This product can be bought once per account and costs 25 robux!)
+
+# Credits
++ Scripting by @katerhub or Colin4President
++ Moderating server by @drillz_.
