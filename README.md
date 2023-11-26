@@ -4,6 +4,7 @@
   <a href="https://www.youtube.com/watch?v=8XkBHYU6QpE" target="_blank"><img src="https://img.shields.io/badge/Supporter-.Loveri-green"></img></a>
 </div>
 
+<h2>Script</h2>
 ```lua
 --[[
 ██╗  ██╗ █████╗ ████████╗███████╗██████╗     ██╗  ██╗██╗   ██╗██████╗ 
