@@ -1,6 +1,6 @@
 ![Icon](https://colin4president.github.io/KaterHub/source/png/logo.png)
 # 
-![Static Badge](https://img.shields.io/badge/Scripter-Colin4President-blue)
+![Static Badge](https://img.shields.io/badge/Scripter-Colin4President-blue) ![Static Badge](https://img.shields.io/badge/Moderator-Drills-red)
 
 ```lua
 --[[
@@ -33,7 +33,3 @@ example: :bring [USERNAME] or "." = everyone
 :kick
 ```
 (This product can be bought once per account and costs 25 robux!)
-
-# Credits
-+ Scripting by @katerhub or Colin4President
-+ Moderating server by @drillz_.
