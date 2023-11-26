@@ -1,4 +1,4 @@
-![Icon](https://github.com/Colin4President/KaterHub/blob/main/source/png/KaterHub%20Logo.png?raw=true)
+![Icon]()
 
 # 
 ```lua
