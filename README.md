@@ -1,8 +1,8 @@
 <div align="left">
   <h3>What is KaterHub?</h3>
   <p class="discription">KaterHub is a free tool for Roblox to have fun or to have fun with your friends!<br>If you have any problems with our tool please report the issue to our discord server!<br><br>Using our tool is only at your own risk! If something happens, we are not responsible for it</p>
-  <h1>test</h1>
-  
+  <h1>Info</h1>
+  <p class="discription">Since Roblox now has an anti-cheat it will be very difficult to bypass the system. Nevertheless, we will keep our tool online but will no longer update it!</p>
 </div>
 <div align="center">
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>
