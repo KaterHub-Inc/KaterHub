@@ -7,7 +7,7 @@
 <div align="center">
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Moderator_and_Manager-Drills-red"></img></a>
-  <a href="https://www.youtube.com/watch?v=8XkBHYU6QpE" target="_blank"><img src="https://img.shields.io/badge/Supporter-.Loveri-green"></img></a>
+  <a href="https://www.youtube.com/watch?v=8XkBHYU6QpE" target="_blank"><img src="https://img.shields.io/badge/Supporter_from_the_very_beginning-.Loveri-green"></img></a>
   <a href="https://discord.gg/gv8TGUxDzU" target="_blank"><img src="https://img.shields.io/discord/1095027366327234685?logo=discord&label=Join%20our%20Discord!&color=ba34eb">  
   <h2>Script</h2>
   </img></a>
