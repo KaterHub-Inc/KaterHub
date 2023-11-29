@@ -25,7 +25,7 @@ discord.gg/gv8TGUxDzU
 ]]
 
 --- Updated Source
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/KaterHub/main/main.lua"))()
+loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))()
 ```
 <div align="left">
   <a href="https://github.com/Colin4President/KaterHub" target="_blank"><img src="https://img.shields.io/github/contributors/Colin4President/KaterHub"></img></a>
