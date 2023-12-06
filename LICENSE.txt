@@ -1,6 +1,6 @@
 zlib License
 
-Copyright (c) 2023 KaterHub-Inc
+Copyright (c) 2023 KaterHub-Inc and Colin4President
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
