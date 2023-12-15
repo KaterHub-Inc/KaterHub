@@ -77,7 +77,7 @@ Functions.LoadCustomInstance = function(str)
         end
     end
 
-    warn("Something went wrong attempting to load custom instance")
+    warn("[KaterHub]: Something went wrong attempting to load custom instance.")
 end
 
 -- Scripts
