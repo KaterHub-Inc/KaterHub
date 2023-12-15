@@ -18,7 +18,7 @@ local tag
 local userinfo = {}
 
 local source = {
-	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Colin4President/KaterHub/main/source/scripts/functions.lua"))()
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
 }
 
 local success, inviteData = pcall(function()
