@@ -17,6 +17,7 @@ local user
 local tag
 local userinfo = {}
 
+--[[
 local source = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
 }
@@ -24,7 +25,7 @@ local source = {
 local success, inviteData = pcall(function()
 	return HS:JSONDecode(source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..invite, Method = "GET" }).Body)
 end)
-
+]]--
 pcall(function()
 	if not isfolder("KaterHub") then
 		makefolder("KaterHub")
