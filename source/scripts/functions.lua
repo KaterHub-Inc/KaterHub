@@ -1,7 +1,6 @@
 -- Services
 
 local Players = game:GetService("Players")
---local api = loadstring(game:HttpGet("https://raw.githubusercontent.com/KATERGaming/master/main/katerhub/data.json"))()
 
 -- Variables
 
