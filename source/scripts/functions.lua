@@ -1,6 +1,7 @@
 -- Services
 
 local Players = game:GetService("Players")
+local api = game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/KATERGaming/master/main/katerhub/data.json")
 
 -- Variables
 
@@ -40,6 +41,14 @@ local function convertToAsset(str)
 end
 
 -- Functions
+
+Functions.warn = function(val)
+    warn("[KaterHub]: "..api.info.version.." / "..val)
+end
+
+Functions.print = function(val)
+    print("[KaterHub]: "..api.info.version.." / "..val)
+end
 
 Functions.GetPlayerByName = function(name)
     for _, plr in next, Players:GetPlayers() do
