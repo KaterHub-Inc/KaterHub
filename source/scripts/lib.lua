@@ -2017,7 +2017,7 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = source.Functions.LoadCustomAsset("https://cdn.discordapp.com/icons/".. inviteData.guild.id.. "/".. inviteData.guild.icon.. ".png")
+			ServerIco.Image = source.Functions.LoadCustomAsset("https://tr.rbxcdn.com/ebcf53d5dde8b0336ee7bb647dda849d/150/150/Image/Webp")
 		end
 
 		if fs == false then
