@@ -1,6 +1,9 @@
-["KaterHub"] = {
-  ["Info"] = {
-    ["Version"] = 1,
-    ["Invite"] = "kSBmA2qKEp"
-  }
+{
+  "data": [
+    {
+      "version": 1,
+      "invite": "kSBmA2qKEp"
+    }
+  ],
+  "online": true
 }
