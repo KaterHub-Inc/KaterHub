@@ -1,9 +1,7 @@
 {
-  "data": [
-    {
-      "version": 1,
-      "invite": "kSBmA2qKEp"
-    }
-  ],
-  "online": true
+  "invite": "kSBmA2qKEp",
+  "info": {
+    "version": "1.0",
+    "online": true
+  }
 }
