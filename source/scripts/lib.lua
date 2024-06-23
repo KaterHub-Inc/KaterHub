@@ -1,56 +1,28 @@
 local KaterHubLib = {}
-local katerhubadmins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))()
-local katerhubstars = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
-local invite = tostring(game:HttpGet("https://pastebin.com/raw/47UfT4rk"))
-local version = tostring(game:HttpGet("https://pastebin.com/raw/kYHVqf0Y"))
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
-local TS = game:GetService("TweenService")
-local HS = game:GetService("HttpService")
-local CG = game:GetService("CoreGui")
 local pfp
 local user
 local tag
 local userinfo = {}
 
-local source = {
-	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
-}
-
-local success, inviteData = pcall(function()
-	return HS:JSONDecode(source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..invite, Method = "GET" }).Body)
-end)
-
 pcall(function()
-	if not isfolder("KaterHub") then
-		makefolder("KaterHub")
-	end
-	userinfo = HttpService:JSONDecode(readfile("KaterHub/KaterHub-Data.json"));
+	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
 end)
 
-if table.find(katerhubadmins, game.Players.LocalPlayer.UserId) then
-	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName.." 👑"
-	tag = userinfo["tag"] or tostring(math.random(1000,9999))
-elseif table.find(katerhubstars, game.Players.LocalPlayer.UserId) then
-	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName.." ⭐"
-	tag = userinfo["tag"] or tostring(math.random(1000,9999))
-else
-	pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-	user =  userinfo["user"] or game.Players.LocalPlayer.DisplayName
-	tag = userinfo["tag"] or tostring(math.random(1000,9999))
-end
+pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or game.Players.LocalPlayer.Name
+tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("KaterHub/KaterHub-Data.json", HttpService:JSONEncode(userinfo));
+	writefile("discordlibinfo.txt", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -109,10 +81,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local Katerhub = Instance.new("ScreenGui")
-Katerhub.Name = "KaterHub-"..invite
-Katerhub.Parent = game.CoreGui
-Katerhub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Discord = Instance.new("ScreenGui")
+Discord.Name = "Discord"
+Discord.Parent = game.CoreGui
+Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function KaterHubLib:Window(text)
 	local currentservertoggled = ""
@@ -141,7 +113,7 @@ function KaterHubLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = Katerhub
+	MainFrame.Parent = Discord
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -425,7 +397,7 @@ function KaterHubLib:Window(text)
 	local MyAccountBtnCorner = Instance.new("UICorner")
 	local MyAccountBtnTitle = Instance.new("TextLabel")
 	local SettingsTitle = Instance.new("TextLabel")
-	local KaterhubInfo = Instance.new("TextLabel")
+	local DiscordInfo = Instance.new("TextLabel")
 	local CurrentSettingOpen = Instance.new("TextLabel")
 
 	SettingsFrame.Name = "SettingsFrame"
@@ -549,7 +521,7 @@ function KaterHubLib:Window(text)
 	TextLabel.Position = UDim2.new(-0.0666666701, 0, 1.06666672, 0)
 	TextLabel.Size = UDim2.new(0, 34, 0, 22)
 	TextLabel.Font = Enum.Font.GothamSemibold
-	TextLabel.Text = "close"
+	TextLabel.Text = "rightctrl"
 	TextLabel.TextColor3 = Color3.fromRGB(113, 117, 123)
 	TextLabel.TextSize = 11.000
 
@@ -820,7 +792,7 @@ function KaterHubLib:Window(text)
 		Text2.Position = UDim2.new(-0.000594122568, 0, 0.141587839, 0)
 		Text2.Size = UDim2.new(0, 346, 0, 63)
 		Text2.Font = Enum.Font.Gotham
-		Text2.Text = "Enter your new profile picture link."
+		Text2.Text = "Enter your new profile in a Roblox decal link."
 		Text2.TextColor3 = Color3.fromRGB(171, 172, 176)
 		Text2.TextSize = 14.000
 
@@ -887,10 +859,10 @@ function KaterHubLib:Window(text)
 		end)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
-			pfp = source.Functions.LoadCustomAsset(tostring(AvatarTextbox.Text))
-			SaveInfo()
+			pfp = tostring(AvatarTextbox.Text)
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
+			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
 			TweenService:Create(
@@ -1139,19 +1111,19 @@ function KaterHubLib:Window(text)
 	SettingsTitle.TextSize = 11.000
 	SettingsTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-	KaterhubInfo.Name = "Description"
-	KaterhubInfo.Parent = LeftFrame
-	KaterhubInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	KaterhubInfo.BackgroundTransparency = 1.000
-	KaterhubInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
-	KaterhubInfo.Size = UDim2.new(0, 133, 0, 44)
-	KaterhubInfo.Font = Enum.Font.Gotham
-	KaterhubInfo.Text = "We introduce players to the other side of Roblox."
-	KaterhubInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
-	KaterhubInfo.TextSize = 13.000
-	KaterhubInfo.TextWrapped = true
-	KaterhubInfo.TextXAlignment = Enum.TextXAlignment.Left
-	KaterhubInfo.TextYAlignment = Enum.TextYAlignment.Top
+	DiscordInfo.Name = "DiscordInfo"
+	DiscordInfo.Parent = LeftFrame
+	DiscordInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DiscordInfo.BackgroundTransparency = 1.000
+	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
+	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
+	DiscordInfo.Font = Enum.Font.Gotham
+	DiscordInfo.Text = "Stable 1.0.0 (00001)  Host 0.0.0.1                Roblox Lua Engine    "
+	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
+	DiscordInfo.TextSize = 13.000
+	DiscordInfo.TextWrapped = true
+	DiscordInfo.TextXAlignment = Enum.TextXAlignment.Left
+	DiscordInfo.TextYAlignment = Enum.TextYAlignment.Top
 
 	CurrentSettingOpen.Name = "CurrentSettingOpen"
 	CurrentSettingOpen.Parent = LeftFrame
@@ -1692,7 +1664,6 @@ function KaterHubLib:Window(text)
 		local Server = Instance.new("TextButton")
 		local ServerBtnCorner = Instance.new("UICorner")
 		local ServerIco = Instance.new("ImageLabel")
-		local ServerIcoCorner = Instance.new("UICorner")
 		local ServerWhiteFrame = Instance.new("Frame")
 		local ServerWhiteFrameCorner = Instance.new("UICorner")
 
@@ -1717,13 +1688,9 @@ function KaterHubLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 49, 0, 49)
+		ServerIco.Size = UDim2.new(0, 26, 0, 26)
 		ServerIco.Image = ""
 
-		ServerIcoCorner.CornerRadius = UDim.new(0, 10)
-		ServerIcoCorner.Name = "ServerIcoCorner"
-		ServerIcoCorner.Parent = ServerIco
-		
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
 		ServerWhiteFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -2017,7 +1984,7 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = source.Functions.LoadCustomAsset("https://tr.rbxcdn.com/ebcf53d5dde8b0336ee7bb647dda849d/150/150/Image/Webp")
+			ServerIco.Image = img
 		end
 
 		if fs == false then
