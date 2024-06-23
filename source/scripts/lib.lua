@@ -10,6 +10,16 @@ local user
 local tag
 local userinfo = {}
 
+local Source = {
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))(),
+	Admins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))(),
+	Premiums = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
+}
+
+local success, katerhub = pcall(function()
+	return http:JSONDecode(Source.Functions.Request({ Url = "https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/data.json", Method = "GET" }).Body)
+end)
+
 pcall(function()
 	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
 end)
@@ -1118,7 +1128,7 @@ function KaterHubLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "We introduc players to the other side of Roblox."
+	DiscordInfo.Text = katerhub.data[1].description
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
