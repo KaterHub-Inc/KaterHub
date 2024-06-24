@@ -24,6 +24,16 @@ local Source = {
 local success, katerhub = pcall(function()
 	return http:JSONDecode(Source.Functions.Request({ Url = "https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/data.json", Method = "GET" }).Body)
 end)
+local discordworks, discord = pcall(function()
+	return http:JSONDecode(Source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..katerhub.data[1].invite, Method = "GET" }).Body)
+end)
+
+local discorddata = {
+	guild = nil,
+	Server = nil,
+
+}
+
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. LocalPlayer.UserId .."&width=420&height=420&format=png"
 user =  userinfo["user"] or LocalPlayer.DisplayName
@@ -93,7 +103,7 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
+Discord.Name = "KaterHub-"..game.JobId
 Discord.Parent = game.CoreGui
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -871,8 +881,8 @@ function KaterHubLib:Window(text)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
 			pfp = tostring(AvatarTextbox.Text)
-			UserImage.Image = pfp 
-			UserPanelUserImage.Image = pfp
+			UserImage.Image = LoadCustomAsset(tostring(AvatarTextbox.Text))
+			UserPanelUserImage.Image = LoadCustomAsset(tostring(AvatarTextbox.Text))
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -1995,7 +2005,15 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			if img == "." then
+				if discordworks then
+					ServerIco.Image = LoadCustomAsset("https://cdn.discordapp.com/icons/"..discord.guild_id.."/"..discord.guild.icon..".png")
+				else
+					print("[KaterHub]: Lib servericon cant be used!")
+				end
+			else
+				ServerIco.Image = LoadCustomAsset(tostring(img))
+			end
 		end
 
 		if fs == false then
