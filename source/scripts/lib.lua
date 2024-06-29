@@ -557,7 +557,7 @@ function KaterHubLib:Window(text)
 	DiscordPanel.Name = "DiscordPanel"
 	DiscordPanel.Parent = SettingsHolder
 	DiscordPanel.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
-	DiscordPanel.Position = UDim2.new(0.365638763, 0, 0.640466673, 0)
+	DiscordPanel.Position = UDim2.new(0.365638763, 0, 0.630466673, 0)
 	DiscordPanel.Size = UDim2.new(0, 362, 0, 134)
 
 	UserSettingsPad.Name = "UserSettingsPad"
