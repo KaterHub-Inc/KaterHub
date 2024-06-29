@@ -392,6 +392,8 @@ function KaterHubLib:Window(text)
 	local UserPanel = Instance.new("Frame")
 	local DiscordPanel = Instance.new("Frame")
 	local DiscordPanelCorner = Instance.new("UICorner")
+	local DiscordPad = Instance.new("Frame")
+	local DiscordPadCorner = Instance.new("UICorner")
 	local UserSettingsPad = Instance.new("Frame")
 	local UserSettingsPadCorner = Instance.new("UICorner")
 	local UsernameText = Instance.new("TextLabel")
@@ -566,8 +568,17 @@ function KaterHubLib:Window(text)
 	UserSettingsPad.Position = UDim2.new(0.0331491716, 0, 0.568140388, 0)
 	UserSettingsPad.Size = UDim2.new(0, 337, 0, 56)
 
+	DiscordPad.Name = "DiscordPad"
+	DiscordPad.Parent = DiscordPanel
+	DiscordPad.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
+	DiscordPad.Position = UDim2.new(0.365638763, 0, 0.680466673, 0)
+	DiscordPad.Size = UDim2.new(0, 337, 0, 56)
+	
 	DiscordPanelCorner.Name = "DiscordPanelCorner"
 	DiscordPanelCorner.Parent = DiscordPanel
+
+	DiscordPadCorner.Name = "DiscordPadCorner"
+	DiscordPadCorner.Parent = DiscordPanelCorner
 	
 	UserSettingsPadCorner.Name = "UserSettingsPadCorner"
 	UserSettingsPadCorner.Parent = UserSettingsPad
