@@ -86,9 +86,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
+local v1 = player.AccountAge.."."..player.UserId
 for q,v in pairs(CoreGui:GetChildren()) do
 	if v:IsA("ScreenGui") then
-		if v.DisplayOrder == player.UserId.."2"..player.AccountAge then
+		if v.DisplayOrder == tonumber(math.ceil(v1)) then
 			v:Destroy()
 		end
 	end
@@ -96,7 +97,7 @@ end
 
 local KaterHubLib = Instance.new("ScreenGui")
 KaterHubLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-KaterHubLib.DisplayOrder = player.UserId.."2"..player.AccountAge
+KaterHubLib.DisplayOrder = tonumber(math.ceil(v1))
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		while wait(0.5) do
@@ -308,6 +309,8 @@ function DiscordLib:Window(text)
 	CloseBtn.MouseButton1Click:Connect(
 		function()
 			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
+			wait(.3)
+			KaterHubLib:Destroy()
 		end
 	)
 
