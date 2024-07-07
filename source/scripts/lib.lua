@@ -86,9 +86,17 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
+for q,v in pairs(CoreGui:GetChildren()) do
+	if v:IsA("ScreenGui") then
+		if v.DisplayOrder == player.UserId.."2"..player.AccountAge then
+			v:Destroy()
+		end
+	end
+end
+
 local KaterHubLib = Instance.new("ScreenGui")
 KaterHubLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-KaterHubLib:SetAttribute(player.UserId.."KaterHub"..player.AccountAge,false)
+KaterHubLib.DisplayOrder = player.UserId.."2"..player.AccountAge
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		while wait(0.5) do
