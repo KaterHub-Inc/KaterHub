@@ -101,7 +101,7 @@ Discord.Name = player.UserId.."KaterHubUI"..game.JobId
 Discord.Parent = CoreGui
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function DiscordLib:Window(text)
+function KaterHub:Window(text)
 	local currentservertoggled = ""
 	local minimized = false
 	local fs = false
