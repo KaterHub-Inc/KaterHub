@@ -11,7 +11,7 @@ local RunService = game:GetService("RunService")
 local players = game:GetService("Players")
 local player = players.LocalPlayer
 
-local Mouse = LocalPlayer:GetMouse()
+local Mouse = player:GetMouse()
 local HttpService = game:GetService("HttpService")
 
 local pfp
