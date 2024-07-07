@@ -1,49 +1,43 @@
-local KaterHubLib = {}
+local KaterHub = {
+	Blacklist = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/blacklist.lua"))(),
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
+}
 local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
+
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
+
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+
 local Mouse = LocalPlayer:GetMouse()
-local http = game:GetService("HttpService")
+local HttpService = game:GetService("HttpService")
 
 local pfp
 local user
 local tag
+
 local userinfo = {}
 
 pcall(function()
-	userinfo = http:JSONDecode(readfile("discordlibinfo.txt"));
+	userinfo = HttpService:JSONDecode(readfile("KaterHubData.json"));
+	print("[Lib Credits]: dawid#7205 // https://github.com/dawid-scripts")
 end)
 
-local Source = {
-	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))(),
-	Admins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))(),
-	Premiums = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
-}
-
-local success, katerhub = pcall(function()
+local success, api = pcall(function()
 	return http:JSONDecode(Source.Functions.Request({ Url = "https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/data.json", Method = "GET" }).Body)
 end)
-local discordworks, discord = pcall(function()
-	return http:JSONDecode(Source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..katerhub.data[1].invite, Method = "GET" }).Body)
-end)
 
-local discorddata = {
-	guild = nil,
-	Server = nil,
-
-}
-
-
-pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. LocalPlayer.UserId .."&width=420&height=420&format=png"
-user =  userinfo["user"] or LocalPlayer.DisplayName
+pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or player.DisplayName
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("discordlibinfo.txt", http:JSONEncode(userinfo));
+	writefile("KaterHubData.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -103,11 +97,11 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Discord = Instance.new("ScreenGui")
-Discord.Name = "KaterHub-"..game.JobId
-Discord.Parent = game.CoreGui
+Discord.Name = player.UserId.."KaterHubUI"..game.JobId
+Discord.Parent = CoreGui
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function KaterHubLib:Window(text)
+function DiscordLib:Window(text)
 	local currentservertoggled = ""
 	local minimized = false
 	local fs = false
@@ -240,7 +234,7 @@ function KaterHubLib:Window(text)
 	UserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserImage.BackgroundTransparency = 1.000
 	UserImage.Size = UDim2.new(0, 32, 0, 32)
-	UserImage.Image = pfp 
+	UserImage.Image = KaterHub.Functions.LoadCustomAsset(pfp)
 	
 	UserCircleImage.Name = "UserImage"
 	UserCircleImage.Parent = UserImage
@@ -390,10 +384,6 @@ function KaterHubLib:Window(text)
 	local CloseSettingsBtnIcon = Instance.new("ImageLabel")
 	local TextLabel = Instance.new("TextLabel")
 	local UserPanel = Instance.new("Frame")
-	local DiscordPanel = Instance.new("Frame")
-	local DiscordPanelCorner = Instance.new("UICorner")
-	local DiscordPad = Instance.new("Frame")
-	local DiscordPadCorner = Instance.new("UICorner")
 	local UserSettingsPad = Instance.new("Frame")
 	local UserSettingsPadCorner = Instance.new("UICorner")
 	local UsernameText = Instance.new("TextLabel")
@@ -556,30 +546,12 @@ function KaterHubLib:Window(text)
 	UserPanel.Position = UDim2.new(0.365638763, 0, 0.130666673, 0)
 	UserPanel.Size = UDim2.new(0, 362, 0, 164)
 
-	DiscordPanel.Name = "DiscordPanel"
-	DiscordPanel.Parent = SettingsHolder
-	DiscordPanel.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
-	DiscordPanel.Position = UDim2.new(0.365638763, 0, 0.620466673, 0)
-	DiscordPanel.Size = UDim2.new(0, 362, 0, 120)
-
 	UserSettingsPad.Name = "UserSettingsPad"
 	UserSettingsPad.Parent = UserPanel
 	UserSettingsPad.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
 	UserSettingsPad.Position = UDim2.new(0.0331491716, 0, 0.568140388, 0)
 	UserSettingsPad.Size = UDim2.new(0, 337, 0, 56)
 
-	DiscordPad.Name = "DiscordPad"
-	DiscordPad.Parent = DiscordPanel
-	DiscordPad.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
-	DiscordPad.Position = UDim2.new(0.365638763, 0, 0.680466673, 0)
-	DiscordPad.Size = UDim2.new(0, 337, 0, 56)
-	
-	DiscordPanelCorner.Name = "DiscordPanelCorner"
-	DiscordPanelCorner.Parent = DiscordPanel
-
-	DiscordPadCorner.Name = "DiscordPadCorner"
-	DiscordPadCorner.Parent = DiscordPanelCorner
-	
 	UserSettingsPadCorner.Name = "UserSettingsPadCorner"
 	UserSettingsPadCorner.Parent = UserSettingsPad
 
@@ -675,7 +647,7 @@ function KaterHubLib:Window(text)
 	UserPanelUserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserPanelUserImage.BackgroundTransparency = 1.000
 	UserPanelUserImage.Size = UDim2.new(0, 71, 0, 71)
-	UserPanelUserImage.Image = pfp
+	UserPanelUserImage.Image = KaterHub.Functions.LoadCustomAsset(pfp)
 
 	UserPanelUserCircle.Name = "UserPanelUserCircle"
 	UserPanelUserCircle.Parent = UserPanelUserImage
@@ -903,8 +875,8 @@ function KaterHubLib:Window(text)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
 			pfp = tostring(AvatarTextbox.Text)
-			UserImage.Image = LoadCustomAsset(tostring(AvatarTextbox.Text))
-			UserPanelUserImage.Image = LoadCustomAsset(tostring(AvatarTextbox.Text))
+			UserImage.Image = KaterHub.Functions.LoadCustomAsset(pfp)
+			UserPanelUserImage.Image = KaterHub.Functions.LoadCustomAsset(pfp)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -975,7 +947,7 @@ function KaterHubLib:Window(text)
 		ResetBtn.TextSize = 13.000
 		
 		ResetBtn.MouseButton1Click:Connect(function()
-			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
 			SaveInfo()
@@ -1161,7 +1133,7 @@ function KaterHubLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = katerhub.data[1].description
+	DiscordInfo.Text = api.data[1].description
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
@@ -1558,7 +1530,147 @@ function KaterHubLib:Window(text)
 		
 	end)
 	
-	function KaterHubLib:Notification(titletext, desctext, btntext)
+	function DiscordLib:Notification(titletext, desctext, btntext)
+		local NotificationHolderMain = Instance.new("TextButton")
+		local Notification = Instance.new("Frame")
+		local NotificationCorner = Instance.new("UICorner")
+		local UnderBar = Instance.new("Frame")
+		local UnderBarCorner = Instance.new("UICorner")
+		local UnderBarFrame = Instance.new("Frame")
+		local Text1 = Instance.new("TextLabel")
+		local Text2 = Instance.new("TextLabel")
+		local AlrightBtn = Instance.new("TextButton")
+		local AlrightCorner = Instance.new("UICorner")
+
+		NotificationHolderMain.Name = "NotificationHolderMain"
+		NotificationHolderMain.Parent = MainFrame
+		NotificationHolderMain.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+		NotificationHolderMain.BackgroundTransparency = 1
+		NotificationHolderMain.BorderSizePixel = 0
+		NotificationHolderMain.Position = UDim2.new(0, 0, 0.0560000017, 0)
+		NotificationHolderMain.Size = UDim2.new(0, 681, 0, 374)
+		NotificationHolderMain.AutoButtonColor = false
+		NotificationHolderMain.Font = Enum.Font.SourceSans
+		NotificationHolderMain.Text = ""
+		NotificationHolderMain.TextColor3 = Color3.fromRGB(0, 0, 0)
+		NotificationHolderMain.TextSize = 14.000
+		TweenService:Create(
+			NotificationHolderMain,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0.2}
+		):Play()
+		
+
+		Notification.Name = "Notification"
+		Notification.Parent = NotificationHolderMain
+		Notification.AnchorPoint = Vector2.new(0.5, 0.5)
+		Notification.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
+		Notification.ClipsDescendants = true
+		Notification.Position = UDim2.new(0.524819076, 0, 0.469270051, 0)
+		Notification.Size = UDim2.new(0, 0, 0, 0)
+		Notification.BackgroundTransparency = 1
+		
+		Notification:TweenSize(UDim2.new(0, 346, 0, 176), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
+		
+		TweenService:Create(
+			Notification,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0}
+		):Play()
+
+		NotificationCorner.CornerRadius = UDim.new(0, 5)
+		NotificationCorner.Name = "NotificationCorner"
+		NotificationCorner.Parent = Notification
+
+		UnderBar.Name = "UnderBar"
+		UnderBar.Parent = Notification
+		UnderBar.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
+		UnderBar.Position = UDim2.new(-0.000297061284, 0, 0.945048928, 0)
+		UnderBar.Size = UDim2.new(0, 346, 0, 10)
+
+		UnderBarCorner.CornerRadius = UDim.new(0, 5)
+		UnderBarCorner.Name = "UnderBarCorner"
+		UnderBarCorner.Parent = UnderBar
+
+		UnderBarFrame.Name = "UnderBarFrame"
+		UnderBarFrame.Parent = UnderBar
+		UnderBarFrame.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
+		UnderBarFrame.BorderSizePixel = 0
+		UnderBarFrame.Position = UDim2.new(-0.000297061284, 0, -3.76068449, 0)
+		UnderBarFrame.Size = UDim2.new(0, 346, 0, 40)
+
+		Text1.Name = "Text1"
+		Text1.Parent = Notification
+		Text1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Text1.BackgroundTransparency = 1.000
+		Text1.Position = UDim2.new(-0.000594122568, 0, 0.0202020202, 0)
+		Text1.Size = UDim2.new(0, 346, 0, 68)
+		Text1.Font = Enum.Font.GothamSemibold
+		Text1.Text = titletext
+		Text1.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Text1.TextSize = 20.000
+
+		Text2.Name = "Text2"
+		Text2.Parent = Notification
+		Text2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Text2.BackgroundTransparency = 1.000
+		Text2.Position = UDim2.new(0.106342293, 0, 0.317724228, 0)
+		Text2.Size = UDim2.new(0, 272, 0, 63)
+		Text2.Font = Enum.Font.Gotham
+		Text2.Text = desctext
+		Text2.TextColor3 = Color3.fromRGB(171, 172, 176)
+		Text2.TextSize = 14.000
+		Text2.TextWrapped = true
+
+		AlrightBtn.Name = "AlrightBtn"
+		AlrightBtn.Parent = Notification
+		AlrightBtn.BackgroundColor3 = Color3.fromRGB(114, 137, 228)
+		AlrightBtn.Position = UDim2.new(0.0332369953, 0, 0.789141417, 0)
+		AlrightBtn.Size = UDim2.new(0, 322, 0, 27)
+		AlrightBtn.Font = Enum.Font.Gotham
+		AlrightBtn.Text = btntext
+		AlrightBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+		AlrightBtn.TextSize = 13.000
+		AlrightBtn.AutoButtonColor = false
+		
+		AlrightCorner.CornerRadius = UDim.new(0, 4)
+		AlrightCorner.Name = "AlrightCorner"
+		AlrightCorner.Parent = AlrightBtn
+		
+		AlrightBtn.MouseButton1Click:Connect(function()
+			TweenService:Create(
+				NotificationHolderMain,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			Notification:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
+			TweenService:Create(
+				Notification,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			wait(.2)
+			NotificationHolderMain:Destroy()
+		end)
+		
+		AlrightBtn.MouseEnter:Connect(function()
+			TweenService:Create(
+				AlrightBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(103,123,196)}
+			):Play()
+		end)
+
+		AlrightBtn.MouseLeave:Connect(function()
+			TweenService:Create(
+				AlrightBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
+		end)
+	end
+
+	function DiscordLib:Announcement(titletext, desctext, btntext)
 		local NotificationHolderMain = Instance.new("TextButton")
 		local Notification = Instance.new("Frame")
 		local NotificationCorner = Instance.new("UICorner")
@@ -2027,15 +2139,7 @@ function KaterHubLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			if img == "." then
-				if discordworks then
-					ServerIco.Image = LoadCustomAsset("https://cdn.discordapp.com/icons/"..discord.guild_id.."/"..discord.guild.icon..".png")
-				else
-					print("[KaterHub]: Lib servericon cant be used!")
-				end
-			else
-				ServerIco.Image = LoadCustomAsset(tostring(img))
-			end
+			ServerIco.Image = KaterHub.Functions.LoadCustomAsset(img)
 		end
 
 		if fs == false then
@@ -2911,7 +3015,7 @@ function KaterHubLib:Window(text)
 				ColorpickerTitle.Position = UDim2.new(0, 5, 0, 0)
 				ColorpickerTitle.Size = UDim2.new(0, 200, 0, 29)
 				ColorpickerTitle.Font = Enum.Font.Gotham
-				ColorpickerTitle.Text = "Colorpicker"
+				ColorpickerTitle.Text = text
 				ColorpickerTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
 				ColorpickerTitle.TextSize = 14.000
 				ColorpickerTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -3287,6 +3391,72 @@ function KaterHubLib:Window(text)
 				)
 				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
 			end
+
+			function ChannelContent:GuiBind(presetbind)
+				local Key = presetbind.Name
+				local Keybind = Instance.new("TextButton")
+				local KeybindTitle = Instance.new("TextLabel")
+				local KeybindText = Instance.new("TextLabel")
+
+				Keybind.Name = "Keybind"
+				Keybind.Parent = ChannelHolder
+				Keybind.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
+				Keybind.BorderSizePixel = 0
+				Keybind.Position = UDim2.new(0.261979163, 0, 0.190789461, 0)
+				Keybind.Size = UDim2.new(0, 401, 0, 30)
+				Keybind.AutoButtonColor = false
+				Keybind.Font = Enum.Font.Gotham
+				Keybind.Text = ""
+				Keybind.TextColor3 = Color3.fromRGB(255, 255, 255)
+				Keybind.TextSize = 14.000
+
+				KeybindTitle.Name = "KeybindTitle"
+				KeybindTitle.Parent = Keybind
+				KeybindTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				KeybindTitle.BackgroundTransparency = 1.000
+				KeybindTitle.Position = UDim2.new(0, 5, 0, 0)
+				KeybindTitle.Size = UDim2.new(0, 200, 0, 30)
+				KeybindTitle.Font = Enum.Font.Gotham
+				KeybindTitle.Text = "Toggle GUI"
+				KeybindTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
+				KeybindTitle.TextSize = 14.000
+				KeybindTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+				KeybindText.Name = "KeybindText"
+				KeybindText.Parent = Keybind
+				KeybindText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				KeybindText.BackgroundTransparency = 1.000
+				KeybindText.Position = UDim2.new(0, 316, 0, 0)
+				KeybindText.Size = UDim2.new(0, 85, 0, 30)
+				KeybindText.Font = Enum.Font.Gotham
+				KeybindText.Text = presetbind.Name
+				KeybindText.TextColor3 = Color3.fromRGB(127, 131, 137)
+				KeybindText.TextSize = 14.000
+				KeybindText.TextXAlignment = Enum.TextXAlignment.Right
+				
+				Keybind.MouseButton1Click:Connect(function()
+					KeybindText.Text = "..."
+					local inputwait = game:GetService("UserInputService").InputBegan:wait()
+					if inputwait.KeyCode.Name ~= "Unknown" then
+						KeybindText.Text = inputwait.KeyCode.Name
+						Key = inputwait.KeyCode.Name
+					end
+				end)
+				
+				game:GetService("UserInputService").InputBegan:connect(
+					function(current, pressed)
+						if not pressed then
+							if current.KeyCode.Name == Key then
+								if Discord.Enabled == true then
+									Discord.Enabled = false
+								else
+									Discord.Enabled = true
+								end
+							end
+						end
+					end)
+				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
+			end
 			
 			return ChannelContent
 		end
@@ -3295,4 +3465,4 @@ function KaterHubLib:Window(text)
 	end
 	return ServerHold
 end
-return KaterHubLib
+return KaterHub
