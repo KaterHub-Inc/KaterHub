@@ -2,27 +2,32 @@ local DiscordLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
+
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+
+local CoreGui = game:GetService("CoreGui")
+local Mouse = player:GetMouse()
 local HttpService = game:GetService("HttpService")
+
 local pfp
 local user
 local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
+	userinfo = HttpService:JSONDecode(readfile("DawidsLib.txt"));
 end)
 
-pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-user =  userinfo["user"] or game.Players.LocalPlayer.Name
+pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or player.DisplayName
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("discordlibinfo.txt", HttpService:JSONEncode(userinfo));
+	writefile("DawidsLib.txt", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -81,10 +86,17 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
-Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local KaterHubLib = Instance.new("ScreenGui")
+KaterHubLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+KaterHubLib:SetAttribute(player.UserId.."KaterHub"..player.AccountAge,false)
+coroutine.resume(coroutine.create(function()
+	pcall(function()
+		while wait(0.5) do
+			KaterHubLib.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
+		end
+	end)
+end))
+KaterHubLib.Parent = CoreGui
 
 function DiscordLib:Window(text)
 	local currentservertoggled = ""
@@ -113,7 +125,7 @@ function DiscordLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = Discord
+	MainFrame.Parent = KaterHubLib
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -932,7 +944,7 @@ function DiscordLib:Window(text)
 		ResetBtn.TextSize = 13.000
 		
 		ResetBtn.MouseButton1Click:Connect(function()
-			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
 			SaveInfo()
