@@ -1,28 +1,51 @@
-local DiscordLib = {}
+local KaterhubLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local HttpService = game:GetService("HttpService")
+
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+
+local coregui = game:GetService("CoreGui")
+local Mouse = player:GetMouse()
+local http = game:GetService("HttpService")
+
+local users = {
+	blacklist = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/blacklist.lua"))(),
+	admins = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))(),
+	premiums = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
+}
+
+local Source = {
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
+}
+
+if table.find(users.blacklist,player.UserId) then
+	player:Kick("[KaterHub]: you are blacklisted")
+end
+
+local success, katerhub = pcall(function()
+	return http:JSONDecode(Source.Functions.Request({ Url = "https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/data.json", Method = "GET" }).Body)
+end)
+
 local pfp
 local user
 local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
+	userinfo = http:JSONDecode(readfile("KaterHubData.json"));
 end)
 
-pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-user =  userinfo["user"] or game.Players.LocalPlayer.Name
+pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or player.DisplayName
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("discordlibinfo.txt", HttpService:JSONEncode(userinfo));
+	writefile("KaterhubLibinfo.json", http:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -81,12 +104,12 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
-Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Lib = Instance.new("ScreenGui")
+Lib.Name = "KaterHub-"..players.AccountAge
+Lib.Parent = coregui
+Lib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function DiscordLib:Window(text)
+function KaterhubLib:Window(text)
 	local currentservertoggled = ""
 	local minimized = false
 	local fs = false
@@ -1515,7 +1538,7 @@ function DiscordLib:Window(text)
 		
 	end)
 	
-	function DiscordLib:Notification(titletext, desctext, btntext)
+	function KaterhubLib:Notification(titletext, desctext, btntext)
 		local NotificationHolderMain = Instance.new("TextButton")
 		local Notification = Instance.new("Frame")
 		local NotificationCorner = Instance.new("UICorner")
@@ -3244,4 +3267,4 @@ function DiscordLib:Window(text)
 	end
 	return ServerHold
 end
-return DiscordLib
+return KaterhubLib
