@@ -105,7 +105,7 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Lib = Instance.new("ScreenGui")
-Lib.Name = "KaterHub-"..players.AccountAge
+Lib.Name = "KaterHub-"..player.AccountAge
 Lib.Parent = coregui
 Lib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
