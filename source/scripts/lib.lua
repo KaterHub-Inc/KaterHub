@@ -30,6 +30,44 @@ local function SaveInfo()
 	writefile("DawidsLib.txt", HttpService:JSONEncode(userinfo));
 end
 
+local Functions = {
+    IsClosure = is_synapse_function or iskrnlclosure or isexecutorclosure,
+    SetIdentity = (syn and syn.set_thread_identity) or set_thread_identity or setthreadidentity or setthreadcontext,
+    GetIdentity = (syn and syn.get_thread_identity) or get_thread_identity or getthreadidentity or getthreadcontext,
+    Request = (syn and syn.request) or http_request or request,
+    QueueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport,
+    GetAsset = getsynasset or getcustomasset,
+}
+
+local function convertToAsset(str)
+    if isfile(str) then
+        return Functions.GetAsset(str)
+        
+    elseif str:find("rbxassetid") or tonumber(str) then
+        local numberId = str:gsub("%D", "")
+        return "rbxassetid://".. numberId
+        
+    elseif str:find("http") then
+        local req = Functions.Request({Url=str, Method="GET"})
+        
+        if req.Success then
+            local name = "customObject_".. tick().. ".txt"
+            writefile(name, req.Body)
+            return Functions.GetAsset(name)
+        end
+    end
+
+    return str
+end
+
+Functions.LoadCustomAsset = function(str)
+    if str == "" then
+        return ""
+    end
+
+    return convertToAsset(str)
+end
+
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
 	local DragInput = nil
@@ -240,7 +278,7 @@ function DiscordLib:Window(text)
 	UserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserImage.BackgroundTransparency = 1.000
 	UserImage.Size = UDim2.new(0, 32, 0, 32)
-	UserImage.Image = pfp 
+	UserImage.Image = Functions.LoadCustomAsset(pfp)
 	
 	UserCircleImage.Name = "UserImage"
 	UserCircleImage.Parent = UserImage
@@ -655,7 +693,7 @@ function DiscordLib:Window(text)
 	UserPanelUserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserPanelUserImage.BackgroundTransparency = 1.000
 	UserPanelUserImage.Size = UDim2.new(0, 71, 0, 71)
-	UserPanelUserImage.Image = pfp
+	UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
 
 	UserPanelUserCircle.Name = "UserPanelUserCircle"
 	UserPanelUserCircle.Parent = UserPanelUserImage
@@ -883,8 +921,8 @@ function DiscordLib:Window(text)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
 			pfp = tostring(AvatarTextbox.Text)
-			UserImage.Image = pfp 
-			UserPanelUserImage.Image = pfp
+			UserImage.Image = Functions.LoadCustomAsset(pfp) 
+			UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -956,8 +994,8 @@ function DiscordLib:Window(text)
 		
 		ResetBtn.MouseButton1Click:Connect(function()
 			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
-			UserImage.Image = pfp 
-			UserPanelUserImage.Image = pfp
+			UserImage.Image = Functions.LoadCustomAsset(pfp) 
+			UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -2007,7 +2045,7 @@ function DiscordLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			ServerIco.Image = Functions.LoadCustomAsset(img)
 		end
 
 		if fs == false then
@@ -2883,7 +2921,7 @@ function DiscordLib:Window(text)
 				ColorpickerTitle.Position = UDim2.new(0, 5, 0, 0)
 				ColorpickerTitle.Size = UDim2.new(0, 200, 0, 29)
 				ColorpickerTitle.Font = Enum.Font.Gotham
-				ColorpickerTitle.Text = "Colorpicker"
+				ColorpickerTitle.Text = text
 				ColorpickerTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
 				ColorpickerTitle.TextSize = 14.000
 				ColorpickerTitle.TextXAlignment = Enum.TextXAlignment.Left
