@@ -60,7 +60,7 @@ local function convertToAsset(str)
     return str
 end
 
-Functions.LoadCustomAsset = function(str)
+local function LoadCustomAsset(str)
     if str == "" then
         return ""
     end
@@ -278,7 +278,7 @@ function DiscordLib:Window(text)
 	UserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserImage.BackgroundTransparency = 1.000
 	UserImage.Size = UDim2.new(0, 32, 0, 32)
-	UserImage.Image = Functions.LoadCustomAsset(pfp)
+	UserImage.Image = LoadCustomAsset(pfp)
 	
 	UserCircleImage.Name = "UserImage"
 	UserCircleImage.Parent = UserImage
@@ -693,7 +693,7 @@ function DiscordLib:Window(text)
 	UserPanelUserImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	UserPanelUserImage.BackgroundTransparency = 1.000
 	UserPanelUserImage.Size = UDim2.new(0, 71, 0, 71)
-	UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
+	UserPanelUserImage.Image = LoadCustomAsset(pfp)
 
 	UserPanelUserCircle.Name = "UserPanelUserCircle"
 	UserPanelUserCircle.Parent = UserPanelUserImage
@@ -921,8 +921,8 @@ function DiscordLib:Window(text)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
 			pfp = tostring(AvatarTextbox.Text)
-			UserImage.Image = Functions.LoadCustomAsset(pfp) 
-			UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
+			UserImage.Image = LoadCustomAsset(pfp) 
+			UserPanelUserImage.Image = LoadCustomAsset(pfp)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -994,8 +994,8 @@ function DiscordLib:Window(text)
 		
 		ResetBtn.MouseButton1Click:Connect(function()
 			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
-			UserImage.Image = Functions.LoadCustomAsset(pfp) 
-			UserPanelUserImage.Image = Functions.LoadCustomAsset(pfp)
+			UserImage.Image = LoadCustomAsset(pfp) 
+			UserPanelUserImage.Image = FuncLoadCustomAsset(pfp)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
@@ -2045,7 +2045,7 @@ function DiscordLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = Functions.LoadCustomAsset(img)
+			ServerIco.Image = LoadCustomAsset(img)
 		end
 
 		if fs == false then
