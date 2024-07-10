@@ -1152,7 +1152,7 @@ function DiscordLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "katerhub.data[1].description"
+	DiscordInfo.Text = "Yeahyu"
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
@@ -2018,7 +2018,13 @@ function DiscordLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			if img == "kh" then
+				ServerIco.Image = LoadCustomAsset("https://cdn.discordapp.com/icons/"..InviteData.guild.id.."/"..InviteData.guild.icon..".png")
+			elseif img == "game" then
+				ServerIco.Image = LoadCustomAsset("")
+			else
+				ServerIco.Image = img
+			end
 		end
 
 		if fs == false then
