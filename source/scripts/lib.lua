@@ -10,8 +10,6 @@ local CoreGui = game:GetService("CoreGui")
 local Mouse = player:GetMouse()
 local HttpService = game:GetService("HttpService")
 
-local SaveName = "DawidsLib.json"
-
 local Source = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
 }
@@ -30,7 +28,7 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("KaterHub/"..tostring(SaveName)));
+	userinfo = HttpService:JSONDecode(readfile("KaterHub/DawidsLib.json"));
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
@@ -42,7 +40,7 @@ local function SaveInfo()
 	userinfo["user"] = user
 	userinfo["tag"] = tag
 	makefolder("KaterHub")
-	writefile("KaterHub/"..tostring(SaveName), HttpService:JSONEncode(userinfo));
+	writefile("KaterHub/DawidsLib.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -111,14 +109,12 @@ for q,v in pairs(CoreGui:GetChildren()) do
 end
 
 local KaterHubLib = Instance.new("ScreenGui")
-local DiscordInfotxt
 KaterHubLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 KaterHubLib.DisplayOrder = tonumber(math.ceil(v1))
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		while wait(0.5) do
 			KaterHubLib.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
-			DiscordInfotxt = katerhub.data[1].description
 		end
 	end)
 end))
@@ -1156,7 +1152,7 @@ function DiscordLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = DiscordInfotxt
+	DiscordInfo.Text = katerhub.data[1].description
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
