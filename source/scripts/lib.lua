@@ -2,25 +2,11 @@ local DiscordLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
 
 local players = game:GetService("Players")
 local player = players.LocalPlayer
-
-local CoreGui = game:GetService("CoreGui")
 local Mouse = player:GetMouse()
-local HttpService = game:GetService("HttpService")
-
-local Source = {
-	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
-}
-
-local success, katerhub = pcall(function()
-	return http:JSONDecode(Source.Functions.Request({ Url = "https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/data.json", Method = "GET" }).Body)
-end)
-
-local success, InviteData = pcall(function()
-	return http:JSONDecode(Source.Functions.Request({ Url = "https://ptb.discord.com/api/invites/"..katerhub.data[1].invite.."?with_counts=true&with_expiration=true", Method = "GET" }).Body)
-end)
 
 local pfp
 local user
@@ -28,7 +14,9 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("KaterHub / DawidsLib.json"));
+	if isfolder("KaterHub") then
+		userinfo = HttpService:JSONDecode(readfile("KaterHub/setting.json"));
+	end
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
@@ -39,8 +27,13 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	makefolder("KaterHub")
-	writefile("KaterHub / DawidsLib.json", HttpService:JSONEncode(userinfo));
+	
+	if not isfolder("KaterHub") then
+		makefolder("KaterHub")
+		writefile("KaterHub/setting.json", HttpService:JSONEncode(userinfo));
+	else
+		writefile("KaterHub/setting.json", HttpService:JSONEncode(userinfo));
+	end
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -99,26 +92,15 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local v1 = player.AccountAge.."."..player.UserId
-for q,v in pairs(CoreGui:GetChildren()) do
-	if v:IsA("ScreenGui") then
-		if v.DisplayOrder == tonumber(math.ceil(v1)) then
-			v:Destroy()
-		end
-	end
-end
-
-local KaterHubLib = Instance.new("ScreenGui")
-KaterHubLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-KaterHubLib.DisplayOrder = tonumber(math.ceil(v1))
+local Discord = Instance.new("ScreenGui")
+Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 coroutine.resume(coroutine.create(function()
-	pcall(function()
-		while wait(0.5) do
-			KaterHubLib.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
-		end
-	end)
+	while task.wait(0.5) do
+		Discord.DisplayOrder == tonumber(math.ceil(player.AccountAge.."."..player.UserId))
+		Discord.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
+	end
 end))
-KaterHubLib.Parent = CoreGui
+Discord.Parent = game:GetService("CoreGui")
 
 function DiscordLib:Window(text)
 	local currentservertoggled = ""
@@ -147,7 +129,7 @@ function DiscordLib:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = KaterHubLib
+	MainFrame.Parent = Discord
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
 	MainFrame.BorderSizePixel = 0
@@ -319,34 +301,58 @@ function DiscordLib:Window(text)
 	ServersHoldPadding.Name = "ServersHoldPadding"
 	ServersHoldPadding.Parent = ServersHold
 
-	CloseBtn.MouseButton1Click:Connect(function()
-		MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-	end)
-
-	CloseBtn.MouseEnter:Connect(function()
-		CloseBtn.BackgroundColor3 = Color3.fromRGB(240, 71, 71)
-	end)
-
-	CloseBtn.MouseLeave:Connect(function()
-		CloseBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
-	end)
-
-	MinimizeBtn.MouseEnter:Connect(function()
-		MinimizeBtn.BackgroundColor3 = Color3.fromRGB(40, 43, 46)
-	end)
-
-	MinimizeBtn.MouseLeave:Connect(function()
-		MinimizeBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
-	end)
-
-	MinimizeBtn.MouseButton1Click:Connect(function()
-		if minimized == false then
-			MainFrame:TweenSize(UDim2.new(0, 681, 0, 22),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
-		else
-			MainFrame:TweenSize(UDim2.new(0, 681, 0, 396),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
+	CloseBtn.MouseButton1Click:Connect(
+		function()
+			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
 		end
-		minimized = not minimized
-	end)
+	)
+
+	CloseBtn.MouseEnter:Connect(
+		function()
+			CloseBtn.BackgroundColor3 = Color3.fromRGB(240, 71, 71)
+		end
+	)
+
+	CloseBtn.MouseLeave:Connect(
+		function()
+			CloseBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
+		end
+	)
+
+	MinimizeBtn.MouseEnter:Connect(
+		function()
+			MinimizeBtn.BackgroundColor3 = Color3.fromRGB(40, 43, 46)
+		end
+	)
+
+	MinimizeBtn.MouseLeave:Connect(
+		function()
+			MinimizeBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
+		end
+	)
+
+	MinimizeBtn.MouseButton1Click:Connect(
+		function()
+			if minimized == false then
+				MainFrame:TweenSize(
+					UDim2.new(0, 681, 0, 22),
+					Enum.EasingDirection.Out,
+					Enum.EasingStyle.Quart,
+					.3,
+					true
+				)
+			else
+				MainFrame:TweenSize(
+					UDim2.new(0, 681, 0, 396),
+					Enum.EasingDirection.Out,
+					Enum.EasingStyle.Quart,
+					.3,
+					true
+				)
+			end
+			minimized = not minimized
+		end
+	)
 	
 	local SettingsOpenBtn = Instance.new("TextButton")
 	local SettingsOpenBtnIco = Instance.new("ImageLabel")
@@ -474,9 +480,17 @@ function DiscordLib:Window(text)
 		TopFrameHolder.Visible = true
 		ServersHoldFrame.Visible = true
 		SettingsHolder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-		TweenService:Create(Settings,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+		TweenService:Create(
+			Settings,
+			TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 1}
+		):Play()
 		for i,v in next, SettingsHolder:GetChildren() do
-			TweenService:Create(v,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				v,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 		end
 		wait(.3)
 		SettingsFrame.Visible = false
@@ -490,22 +504,32 @@ function DiscordLib:Window(text)
 		CloseSettingsBtnCircle.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
 	end)
 	
-	UserInputService.InputBegan:Connect(function(io, p)
-		if io.KeyCode == Enum.KeyCode.RightControl then
-			if settingsopened == true then
-				settingsopened = false
-				TopFrameHolder.Visible = true
-				ServersHoldFrame.Visible = true
-				SettingsHolder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-				TweenService:Create(Settings,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-				for i,v in next, SettingsHolder:GetChildren() do
-					TweenService:Create(v,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+	UserInputService.InputBegan:Connect(
+		function(io, p)
+			if io.KeyCode == Enum.KeyCode.RightControl then
+				if settingsopened == true then
+					settingsopened = false
+					TopFrameHolder.Visible = true
+					ServersHoldFrame.Visible = true
+					SettingsHolder:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
+					TweenService:Create(
+						Settings,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundTransparency = 1}
+					):Play()
+					for i,v in next, SettingsHolder:GetChildren() do
+						TweenService:Create(
+							v,
+							TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+							{BackgroundTransparency = 1}
+						):Play()
+					end
+					wait(.3)
+					SettingsFrame.Visible = false
 				end
-				wait(.3)
-				SettingsFrame.Visible = false
 			end
 		end
-	end)
+	)
 
 	TextLabel.Parent = CloseSettingsBtn
 	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -591,11 +615,19 @@ function DiscordLib:Window(text)
 	EditBtn.AutoButtonColor = false
 	
 	EditBtn.MouseEnter:Connect(function()
-		TweenService:Create(EditBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(104,114,127)}):Play()
+		TweenService:Create(
+			EditBtn,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundColor3 = Color3.fromRGB(104,114,127)}
+		):Play()
 	end)
 	
 	EditBtn.MouseLeave:Connect(function()
-		TweenService:Create(EditBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(116, 127, 141)}):Play()
+		TweenService:Create(
+			EditBtn,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundColor3 = Color3.fromRGB(116, 127, 141)}
+		):Play()
 	end)
 
 	EditBtnCorner.CornerRadius = UDim.new(0, 3)
@@ -690,7 +722,13 @@ function DiscordLib:Window(text)
 		NotificationHolder.TextSize = 14.000
 		NotificationHolder.BackgroundTransparency = 1
 		NotificationHolder.Visible = true
-		TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0.2}):Play()
+		TweenService:Create(
+			NotificationHolder,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0.2}
+		):Play()
+
+
 
 		local AvatarChange = Instance.new("Frame")
 		local UserChangeCorner = Instance.new("UICorner")
@@ -724,7 +762,11 @@ function DiscordLib:Window(text)
 		AvatarChange.BackgroundTransparency = 1
 		
 		AvatarChange:TweenSize(UDim2.new(0, 346, 0, 198), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-		TweenService:Create(AvatarChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+		TweenService:Create(
+			AvatarChange,
+			TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0}
+		):Play()
 
 
 		UserChangeCorner.CornerRadius = UDim.new(0, 5)
@@ -817,11 +859,19 @@ function DiscordLib:Window(text)
 		ChangeBtn.AutoButtonColor = false
 
 		ChangeBtn.MouseEnter:Connect(function()
-			TweenService:Create(ChangeBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(103,123,196)}):Play()
+			TweenService:Create(
+				ChangeBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(103,123,196)}
+			):Play()
 		end)
 
 		ChangeBtn.MouseLeave:Connect(function()
-			TweenService:Create(ChangeBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				ChangeBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 
 		ChangeBtn.MouseButton1Click:Connect(function()
@@ -831,8 +881,16 @@ function DiscordLib:Window(text)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(AvatarChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				AvatarChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
@@ -896,8 +954,16 @@ function DiscordLib:Window(text)
 			SaveInfo()
 
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(AvatarChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				AvatarChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
@@ -908,35 +974,70 @@ function DiscordLib:Window(text)
 		
 		CloseBtn1.MouseButton1Click:Connect(function()
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(AvatarChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				AvatarChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
 
 		CloseBtn2.MouseButton1Click:Connect(function()
 			AvatarChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(AvatarChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				AvatarChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
 		
 		CloseBtn2.MouseEnter:Connect(function()
-			TweenService:Create(Close2Icon,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageColor3 = Color3.fromRGB(210,210,210)}):Play()
+			TweenService:Create(
+				Close2Icon,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ImageColor3 = Color3.fromRGB(210,210,210)}
+			):Play()
 		end)
 
 		CloseBtn2.MouseLeave:Connect(function()
-			TweenService:Create(Close2Icon,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageColor3 = Color3.fromRGB(119, 122, 127)}):Play()
+			TweenService:Create(
+				Close2Icon,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ImageColor3 = Color3.fromRGB(119, 122, 127)}
+			):Play()
 		end)
 
+
 		AvatarTextbox.Focused:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 
 		AvatarTextbox.FocusLost:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}
+			):Play()
 		end)
+
+
 	end)
 
 	UserPanelUserTag.Name = "UserPanelUserTag"
@@ -1033,7 +1134,7 @@ function DiscordLib:Window(text)
 	DiscordInfo.Position = UDim2.new(0.304721028, 0, 0.821333349, 0)
 	DiscordInfo.Size = UDim2.new(0, 133, 0, 44)
 	DiscordInfo.Font = Enum.Font.Gotham
-	DiscordInfo.Text = "This Lib bugged af, dont use it trust me"
+	DiscordInfo.Text = "Stable 1.0.0 (00001)  Host 0.0.0.1                Roblox Lua Engine    "
 	DiscordInfo.TextColor3 = Color3.fromRGB(101, 108, 116)
 	DiscordInfo.TextSize = 13.000
 	DiscordInfo.TextWrapped = true
@@ -1052,18 +1153,27 @@ function DiscordLib:Window(text)
 	CurrentSettingOpen.TextSize = 14.000
 	CurrentSettingOpen.TextXAlignment = Enum.TextXAlignment.Left
 
-	SettingsOpenBtn.MouseButton1Click:Connect(function()
+	
+	SettingsOpenBtn.MouseButton1Click:Connect(function ()
 		settingsopened = true
-		TopFrameHolder.Visible = false
-		ServersHoldFrame.Visible = false
-		SettingsFrame.Visible = true
-		SettingsHolder:TweenSize(UDim2.new(0, 681, 0, 375), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-		Settings.BackgroundTransparency = 1
-		TweenService:Create(Settings,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
-		for i,v in next, SettingsHolder:GetChildren() do
-			v.BackgroundTransparency = 1
-			TweenService:Create(v,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
-		end
+			TopFrameHolder.Visible = false
+			ServersHoldFrame.Visible = false
+			SettingsFrame.Visible = true
+			SettingsHolder:TweenSize(UDim2.new(0, 681, 0, 375), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
+			Settings.BackgroundTransparency = 1
+			TweenService:Create(
+				Settings,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 0}
+			):Play()
+			for i,v in next, SettingsHolder:GetChildren() do
+				v.BackgroundTransparency = 1
+				TweenService:Create(
+					v,
+					TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					{BackgroundTransparency = 0}
+				):Play()
+			end
 	end)
 	
 	EditBtn.MouseButton1Click:Connect(function()
@@ -1080,7 +1190,11 @@ function DiscordLib:Window(text)
 		NotificationHolder.TextSize = 14.000
 		NotificationHolder.BackgroundTransparency = 1
 		NotificationHolder.Visible = true
-		TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0.2}):Play()
+		TweenService:Create(
+			NotificationHolder,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0.2}
+		):Play()
 
 		local UserChange = Instance.new("Frame")
 		local UserChangeCorner = Instance.new("UICorner")
@@ -1114,7 +1228,11 @@ function DiscordLib:Window(text)
 		UserChange.BackgroundTransparency = 1
 		
 		UserChange:TweenSize(UDim2.new(0, 346, 0, 198), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-		TweenService:Create(UserChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+		TweenService:Create(
+			UserChange,
+			TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0}
+		):Play()
 		
 		UserChangeCorner.CornerRadius = UDim.new(0, 5)
 		UserChangeCorner.Name = "UserChangeCorner"
@@ -1237,11 +1355,19 @@ function DiscordLib:Window(text)
 		ChangeBtn.AutoButtonColor = false
 		
 		ChangeBtn.MouseEnter:Connect(function()
-			TweenService:Create(ChangeBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(103,123,196)}):Play()
+			TweenService:Create(
+				ChangeBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(103,123,196)}
+			):Play()
 		end)
 		
 		ChangeBtn.MouseLeave:Connect(function()
-			TweenService:Create(ChangeBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				ChangeBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 		
 		ChangeBtn.MouseButton1Click:Connect(function()
@@ -1258,9 +1384,16 @@ function DiscordLib:Window(text)
 			SaveInfo()
 
 			UserChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(UserChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
 			TweenService:Create(
-			NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+				UserChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
@@ -1306,26 +1439,50 @@ function DiscordLib:Window(text)
 		
 		CloseBtn1.MouseButton1Click:Connect(function()
 			UserChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(UserChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				UserChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
 		
 		CloseBtn2.MouseButton1Click:Connect(function()
 			UserChange:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(UserChange,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-			TweenService:Create(NotificationHolder,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				UserChange,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
+			TweenService:Create(
+				NotificationHolder,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolder:Destroy()
 		end)
 		
 		CloseBtn2.MouseEnter:Connect(function()
-			TweenService:Create(Close2Icon,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageColor3 = Color3.fromRGB(210,210,210)}):Play()
+			TweenService:Create(
+				Close2Icon,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ImageColor3 = Color3.fromRGB(210,210,210)}
+			):Play()
 		end)
 		
 		CloseBtn2.MouseLeave:Connect(function()
-			TweenService:Create(Close2Icon,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageColor3 = Color3.fromRGB(119, 122, 127)}):Play()
+			TweenService:Create(
+				Close2Icon,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{ImageColor3 = Color3.fromRGB(119, 122, 127)}
+			):Play()
 		end)
 		
 		TagTextbox.Changed:Connect(function()
@@ -1341,20 +1498,37 @@ function DiscordLib:Window(text)
 		end)
 		
 		TagTextbox.Focused:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 		
 		TagTextbox.FocusLost:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}
+			):Play()
 		end)
 		
 		UsernameTextbox.Focused:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 
 		UsernameTextbox.FocusLost:Connect(function()
-			TweenService:Create(TextBoxFrame,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}):Play()
+			TweenService:Create(
+				TextBoxFrame,
+				TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}
+			):Play()
 		end)
+		
 	end)
 	
 	function DiscordLib:Notification(titletext, desctext, btntext)
@@ -1381,7 +1555,11 @@ function DiscordLib:Window(text)
 		NotificationHolderMain.Text = ""
 		NotificationHolderMain.TextColor3 = Color3.fromRGB(0, 0, 0)
 		NotificationHolderMain.TextSize = 14.000
-		TweenService:Create(NotificationHolderMain,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0.2}):Play()
+		TweenService:Create(
+			NotificationHolderMain,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0.2}
+		):Play()
 		
 
 		Notification.Name = "Notification"
@@ -1395,7 +1573,11 @@ function DiscordLib:Window(text)
 		
 		Notification:TweenSize(UDim2.new(0, 346, 0, 176), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
 		
-		TweenService:Create(Notification,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
+		TweenService:Create(
+			Notification,
+			TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{BackgroundTransparency = 0}
+		):Play()
 
 		NotificationCorner.CornerRadius = UDim.new(0, 5)
 		NotificationCorner.Name = "NotificationCorner"
@@ -1457,19 +1639,35 @@ function DiscordLib:Window(text)
 		AlrightCorner.Parent = AlrightBtn
 		
 		AlrightBtn.MouseButton1Click:Connect(function()
-			TweenService:Create(NotificationHolderMain,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				NotificationHolderMain,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			Notification:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .2, true)
-			TweenService:Create(Notification,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
+			TweenService:Create(
+				Notification,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundTransparency = 1}
+			):Play()
 			wait(.2)
 			NotificationHolderMain:Destroy()
 		end)
 		
 		AlrightBtn.MouseEnter:Connect(function()
-			TweenService:Create(AlrightBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(103,123,196)}):Play()
+			TweenService:Create(
+				AlrightBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(103,123,196)}
+			):Play()
 		end)
 
 		AlrightBtn.MouseLeave:Connect(function()
-			TweenService:Create(AlrightBtn,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+			TweenService:Create(
+				AlrightBtn,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
 		end)
 	end
 
@@ -1701,41 +1899,103 @@ function DiscordLib:Window(text)
 			ServerChannelHolder.ScrollBarImageTransparency = 1
 		end)
 
-		Server.MouseEnter:Connect(function()
-			if currentservertoggled ~= Server.Name thenTweenService:Create(Server,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
-				TweenService:Create(ServerBtnCorner,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{CornerRadius = UDim.new(0, 15)}):Play()
-				ServerWhiteFrame:TweenSize(UDim2.new(0, 11, 0, 27),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
-			end
-		end)
-
-		Server.MouseLeave:Connect(function()
-			if currentservertoggled ~= Server.Name then
-				TweenService:Create(Server,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(47, 49, 54)}):Play()
-				TweenService:Create(ServerBtnCorner,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{CornerRadius = UDim.new(1, 0)}):Play()
-				ServerWhiteFrame:TweenSize(UDim2.new(0, 11, 0, 10),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
-			end
-		end)
-
-		Server.MouseButton1Click:Connect(function()
-			currentservertoggled = Server.Name
-			for i, v in next, ServersHolder:GetChildren() do
-				if v.Name == "ServerFrame" then
-					v.Visible = false
-				end
-				ServerFrame.Visible = true
-			end
-			for i, v in next, ServersHold:GetChildren() do
-				if v.ClassName == "TextButton" then
-					TweenService:Create(v,
-					TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(47, 49, 54)}):Play()
-					TweenService:Create(Server,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
-					TweenService:Create(v.ServerCorner,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{CornerRadius = UDim.new(1, 0)}):Play()
-					TweenService:Create(ServerBtnCorner,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{CornerRadius = UDim.new(0, 15)}):Play()
-					v.ServerWhiteFrame:TweenSize(UDim2.new(0, 11, 0, 10),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
-					ServerWhiteFrame:TweenSize(UDim2.new(0, 11, 0, 46),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
+		Server.MouseEnter:Connect(
+			function()
+				if currentservertoggled ~= Server.Name then
+					TweenService:Create(
+						Server,
+						TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+					):Play()
+					TweenService:Create(
+						ServerBtnCorner,
+						TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{CornerRadius = UDim.new(0, 15)}
+					):Play()
+					ServerWhiteFrame:TweenSize(
+						UDim2.new(0, 11, 0, 27),
+						Enum.EasingDirection.Out,
+						Enum.EasingStyle.Quart,
+						.3,
+						true
+					)
 				end
 			end
-		end)
+		)
+
+		Server.MouseLeave:Connect(
+			function()
+				if currentservertoggled ~= Server.Name then
+					TweenService:Create(
+						Server,
+						TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(47, 49, 54)}
+					):Play()
+					TweenService:Create(
+						ServerBtnCorner,
+						TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{CornerRadius = UDim.new(1, 0)}
+					):Play()
+					ServerWhiteFrame:TweenSize(
+						UDim2.new(0, 11, 0, 10),
+						Enum.EasingDirection.Out,
+						Enum.EasingStyle.Quart,
+						.3,
+						true
+					)
+				end
+			end
+		)
+
+		Server.MouseButton1Click:Connect(
+			function()
+				currentservertoggled = Server.Name
+				for i, v in next, ServersHolder:GetChildren() do
+					if v.Name == "ServerFrame" then
+						v.Visible = false
+					end
+					ServerFrame.Visible = true
+				end
+				for i, v in next, ServersHold:GetChildren() do
+					if v.ClassName == "TextButton" then
+						TweenService:Create(
+							v,
+							TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+							{BackgroundColor3 = Color3.fromRGB(47, 49, 54)}
+						):Play()
+						TweenService:Create(
+							Server,
+							TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+							{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+						):Play()
+						TweenService:Create(
+							v.ServerCorner,
+							TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+							{CornerRadius = UDim.new(1, 0)}
+						):Play()
+						TweenService:Create(
+							ServerBtnCorner,
+							TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+							{CornerRadius = UDim.new(0, 15)}
+						):Play()
+						v.ServerWhiteFrame:TweenSize(
+							UDim2.new(0, 11, 0, 10),
+							Enum.EasingDirection.Out,
+							Enum.EasingStyle.Quart,
+							.3,
+							true
+						)
+						ServerWhiteFrame:TweenSize(
+							UDim2.new(0, 11, 0, 46),
+							Enum.EasingDirection.Out,
+							Enum.EasingStyle.Quart,
+							.3,
+							true
+						)
+					end
+				end
+			end
+		)
 
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
@@ -1744,9 +2004,23 @@ function DiscordLib:Window(text)
 		end
 
 		if fs == false then
-			TweenService:Create(Server,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
-			TweenService:Create(ServerBtnCorner,TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{CornerRadius = UDim.new(0, 15)}):Play()
-			ServerWhiteFrame:TweenSize(UDim2.new(0, 11, 0, 46),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,.3,true)
+			TweenService:Create(
+				Server,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+			):Play()
+			TweenService:Create(
+				ServerBtnCorner,
+				TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{CornerRadius = UDim.new(0, 15)}
+			):Play()
+			ServerWhiteFrame:TweenSize(
+				UDim2.new(0, 11, 0, 46),
+				Enum.EasingDirection.Out,
+				Enum.EasingStyle.Quart,
+				.3,
+				true
+			)
 			ServerFrame.Visible = true
 			Server.Name = text .. "Server"
 			currentservertoggled = Server.Name
@@ -2160,36 +2434,50 @@ function DiscordLib:Window(text)
 				ValueLabel.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 				ValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 				ValueLabel.TextSize = 10.000
-
 				local function move(input)
-					local pos =UDim2.new(math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),-6,-0.644999981,0)
-					local pos1 = UDim2.new(math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),0,0,8)
+					local pos =
+						UDim2.new(
+							math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),
+							-6,
+							-0.644999981,
+							0
+						)
+					local pos1 =
+						UDim2.new(
+							math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),
+							0,
+							0,
+							8
+						)
 					CurrentValueFrame.Size = pos1
 					Zip.Position = pos
 					local value = math.floor(((pos.X.Scale * max) / max) * (max - min) + min)
 					ValueLabel.Text = tostring(value)
 					pcall(callback, value)
 				end
-
-				Zip.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						dragging = true
-						ValueBubble.Visible = true
+				Zip.InputBegan:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = true
+							ValueBubble.Visible = true
+						end
 					end
-				end)
-
-				Zip.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						dragging = false
-						ValueBubble.Visible = false
+				)
+				Zip.InputEnded:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							dragging = false
+							ValueBubble.Visible = false
+						end
 					end
-				end)
-
-				game:GetService("UserInputService").InputChanged:Connect(function(input)
+				)
+				game:GetService("UserInputService").InputChanged:Connect(
+				function(input)
 					if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
 						move(input)
 					end
-				end)
+				end
+				)
 				
 				function SliderFunc:Change(tochange)
 					CurrentValueFrame.Size = UDim2.new((tochange or 0) / max, 0, 0, 8)
@@ -2588,7 +2876,7 @@ function DiscordLib:Window(text)
 				ColorpickerTitle.Position = UDim2.new(0, 5, 0, 0)
 				ColorpickerTitle.Size = UDim2.new(0, 200, 0, 29)
 				ColorpickerTitle.Font = Enum.Font.Gotham
-				ColorpickerTitle.Text = text
+				ColorpickerTitle.Text = "Colorpicker"
 				ColorpickerTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
 				ColorpickerTitle.TextSize = 14.000
 				ColorpickerTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -2686,66 +2974,96 @@ function DiscordLib:Window(text)
 					pcall(callback, PresetClr.BackgroundColor3)
 				end
 
-				ColorH =1 -(math.clamp(HueSelection.AbsolutePosition.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /Hue.AbsoluteSize.Y)
-				ColorS =(math.clamp(ColorSelection.AbsolutePosition.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) /Color.AbsoluteSize.X)
-				ColorV =1 -(math.clamp(ColorSelection.AbsolutePosition.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) /Color.AbsoluteSize.Y)
+				ColorH =
+					1 -
+					(math.clamp(HueSelection.AbsolutePosition.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /
+						Hue.AbsoluteSize.Y)
+				ColorS =
+					(math.clamp(ColorSelection.AbsolutePosition.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) /
+						Color.AbsoluteSize.X)
+				ColorV =
+					1 -
+					(math.clamp(ColorSelection.AbsolutePosition.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) /
+						Color.AbsoluteSize.Y)
 
 				PresetClr.BackgroundColor3 = preset
 				Color.BackgroundColor3 = preset
 				pcall(callback, PresetClr.BackgroundColor3)
 
-				Color.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if ColorInput then
-							ColorInput:Disconnect()
-						end
-						ColorInput = RunService.RenderStepped:Connect(function()
-							local ColorX =
-								(math.clamp(Mouse.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) /
-									Color.AbsoluteSize.X)
-							local ColorY =
-								(math.clamp(Mouse.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) /
-									Color.AbsoluteSize.Y)
+				Color.InputBegan:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
 
-							ColorSelection.Position = UDim2.new(ColorX, 0, ColorY, 0)
-							ColorS = ColorX
-							ColorV = 1 - ColorY
+							if ColorInput then
+								ColorInput:Disconnect()
+							end
 
-							UpdateColorPicker(true)
-						end)
-					end
-				end)
+							ColorInput =
+								RunService.RenderStepped:Connect(
+									function()
+									local ColorX =
+										(math.clamp(Mouse.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) /
+											Color.AbsoluteSize.X)
+									local ColorY =
+										(math.clamp(Mouse.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) /
+											Color.AbsoluteSize.Y)
 
-				Color.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if ColorInput then
-							ColorInput:Disconnect()
-						end
-					end
-				end)
+									ColorSelection.Position = UDim2.new(ColorX, 0, ColorY, 0)
+									ColorS = ColorX
+									ColorV = 1 - ColorY
 
-				Hue.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if HueInput then
-							HueInput:Disconnect()
-						end
-						HueInput = RunService.RenderStepped:Connect(function()
-							local HueY = (math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) / Hue.AbsoluteSize.Y)
-							HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
-							ColorH = 1 - HueY
-
-							UpdateColorPicker(true)
-						end)
-					end
-				end)
-
-				Hue.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if HueInput then
-							HueInput:Disconnect()
+									UpdateColorPicker(true)
+								end
+								)
 						end
 					end
-				end)
+				)
+
+				Color.InputEnded:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							if ColorInput then
+								ColorInput:Disconnect()
+							end
+						end
+					end
+				)
+
+				Hue.InputBegan:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+
+
+							if HueInput then
+								HueInput:Disconnect()
+							end
+
+							HueInput =
+								RunService.RenderStepped:Connect(
+									function()
+									local HueY =
+										(math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /
+											Hue.AbsoluteSize.Y)
+
+									HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
+									ColorH = 1 - HueY
+
+									UpdateColorPicker(true)
+								end
+								)
+						end
+					end
+				)
+
+				Hue.InputEnded:Connect(
+					function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							if HueInput then
+								HueInput:Disconnect()
+							end
+						end
+					end
+				)
 				
 				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
 			end
@@ -2815,11 +3133,19 @@ function DiscordLib:Window(text)
 				TextBox.TextXAlignment = Enum.TextXAlignment.Left
 				
 				TextBox.Focused:Connect(function()
-					TweenService:Create(TextboxFrameOutline,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}):Play()
+					TweenService:Create(
+						TextboxFrameOutline,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(114, 137, 228)}
+					):Play()
 				end)
 				
 				TextBox.FocusLost:Connect(function(ep)
-					TweenService:Create(TextboxFrameOutline,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}):Play()
+					TweenService:Create(
+						TextboxFrameOutline,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(37, 40, 43)}
+					):Play()
 					if ep then
 						if #TextBox.Text > 0 then
 							pcall(callback, TextBox.Text)
@@ -2922,7 +3248,8 @@ function DiscordLib:Window(text)
 							pcall(callback)
 						end
 					end
-				end)
+				end
+				)
 				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
 			end
 			
