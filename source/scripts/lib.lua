@@ -22,12 +22,8 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	if not isfolder("KaterHub")
-		makefolder("KaterHub")
-		writefile([[KaterHub/dawid.json]], HttpService:JSONEncode(userinfo));
-	else
-		writefile([[KaterHub/dawid.json]], HttpService:JSONEncode(userinfo));
-	end
+	makefolder("KaterHub")
+	writefile([[KaterHub/dawid.json]], HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
