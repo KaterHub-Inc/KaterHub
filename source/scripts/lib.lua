@@ -2,9 +2,12 @@ local DiscordLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
+
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+local Mouse = player:GetMouse()
+
 local pfp
 local user
 local tag
@@ -14,8 +17,8 @@ pcall(function()
 	userinfo = HttpService:JSONDecode(readfile([[KaterHub/dawid.json]]));
 end)
 
-pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
-user =  userinfo["user"] or game.Players.LocalPlayer.Name
+pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
+user =  userinfo["user"] or player.DisplayName
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
@@ -83,9 +86,15 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Discord.DisplayOrder == tonumber(math.ceil(player.AccountAge.."."..player.UserId))
+coroutine.resume(coroutine.create(function()
+	while wait(0.5) do
+		Discord.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
+		Discord.DisplayOrder == tonumber(math.ceil(player.AccountAge.."."..player.UserId))
+	end
+end))
+Discord.Parent = game:GetService("CoreGui")
 
 function DiscordLib:Window(text)
 	local currentservertoggled = ""
@@ -933,7 +942,7 @@ function DiscordLib:Window(text)
 		ResetBtn.TextSize = 13.000
 		
 		ResetBtn.MouseButton1Click:Connect(function()
-			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
+			pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 			UserImage.Image = pfp 
 			UserPanelUserImage.Image = pfp
 			SaveInfo()
