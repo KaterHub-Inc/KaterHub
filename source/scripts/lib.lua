@@ -86,15 +86,23 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Discord = Instance.new("ScreenGui")
+local v1 = player.AccountAge.."."..player.UserId
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Discord.DisplayOrder == tonumber(math.ceil(player.AccountAge.."."..player.UserId))
+Discord.DisplayOrder == tonumber(math.ceil(v1))
 coroutine.resume(coroutine.create(function()
 	while wait(0.5) do
 		Discord.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
-		Discord.DisplayOrder == tonumber(math.ceil(player.AccountAge.."."..player.UserId))
 	end
 end))
 Discord.Parent = game:GetService("CoreGui")
+
+coroutine.resume(coroutine.create(function()
+	task.wait(15)
+	if not isfile([[KaterHub/dawid.json]]) then
+		SaveInfo()
+		print("[KaterHub]: saved Lib.")
+	end
+end))
 
 function DiscordLib:Window(text)
 	local currentservertoggled = ""
