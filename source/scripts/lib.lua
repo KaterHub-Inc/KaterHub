@@ -11,7 +11,9 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("discordlibinfo.txt"));
+	if not isfolder("KaterHub")
+		userinfo = HttpService:JSONDecode(readfile([[KaterHub/dawid.json]]));
+	end
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
@@ -22,7 +24,12 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("discordlibinfo.txt", HttpService:JSONEncode(userinfo));
+	if not isfolder("KaterHub")
+		makefolder("KaterHub")
+		writefile([[KaterHub/dawid.json]], HttpService:JSONEncode(userinfo));
+	else
+		writefile([[KaterHub/dawid.json]], HttpService:JSONEncode(userinfo));
+	end
 end
 
 local function MakeDraggable(topbarobject, object)
