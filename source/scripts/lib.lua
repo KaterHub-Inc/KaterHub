@@ -11,9 +11,7 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	if not isfolder("KaterHub")
-		userinfo = HttpService:JSONDecode(readfile([[KaterHub/dawid.json]]));
-	end
+	userinfo = HttpService:JSONDecode(readfile([[KaterHub/dawid.json]]));
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
