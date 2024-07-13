@@ -90,7 +90,7 @@ Discord.Parent = game:GetService("CoreGui")
 local v1 = player.AccountAge.."."..player.UserId
 
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Discord.DisplayOrder == tonumber(math.ceil(v1))
+Discord.DisplayOrder == 999
 Discord.Name = tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999)).."-"..tostring(math.random(1000,9999))
 
 function DiscordLib:Window(text)
