@@ -5,6 +5,10 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
+
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+
 local pfp
 local user
 local tag
@@ -83,10 +87,16 @@ local function MakeDraggable(topbarobject, object)
 end
 
 local Discord = Instance.new("ScreenGui")
-Discord.Name = "Discord"
-Discord.Parent = game.CoreGui
-Discord.DisplayOrder = math.ceil(9898989)
+Discord.Name = tostring(math.random(1000,9999)) .. "-" .. tostring(math.random(1000,9999)) .. "-" .. tostring(math.random(1000,9999))
+Discord.Parent = game:GetService("CoreGui")
+Discord.DisplayOrder = math.ceil(player.AccountAge.."."..player.UserId)
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+coroutine.resume(coroutine.create(function()
+	while wait(0.5) do
+		Discord.Name = tostring(math.random(1000,9999)) .. "-" .. tostring(math.random(1000,9999)) .. "-" .. tostring(math.random(1000,9999))
+	end
+end))
 
 function DiscordLib:Window(text)
 	local currentservertoggled = ""
