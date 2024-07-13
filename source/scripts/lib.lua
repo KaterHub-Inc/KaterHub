@@ -22,7 +22,7 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	makefolder("Sky Hub")
+	makefolder("KaterHub")
 	writefile("KaterHub/dawid.json", HttpService:JSONEncode(userinfo));
 end
 
