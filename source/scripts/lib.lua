@@ -14,7 +14,7 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile([[KaterHub/dawids.json]]));
+	userinfo = HttpService:JSONDecode(readfile(KaterHub/dawids.json));
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
