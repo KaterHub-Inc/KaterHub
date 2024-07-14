@@ -14,7 +14,7 @@ local tag
 local userinfo = {}
 
 pcall(function()
-	userinfo = HttpService:JSONDecode(readfile("KaterHub/dawids.json"));
+	userinfo = HttpService:JSONDecode(readfile("DawidsLib-KaterHub.json"));
 end)
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
@@ -25,8 +25,7 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	makefolder("KaterHub")
-	writefile("KaterHub/dawid.json", HttpService:JSONEncode(userinfo));
+	writefile("DawidsLib-KaterHub.json", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -296,58 +295,49 @@ function DiscordLib:Window(text)
 	ServersHoldPadding.Name = "ServersHoldPadding"
 	ServersHoldPadding.Parent = ServersHold
 
-	CloseBtn.MouseButton1Click:Connect(
-		function()
-			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
-		end
-	)
+	CloseBtn.MouseButton1Click:Connect(function()
+		local time = 0.3
+		MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, time, true)
+		wait(time)
+		Discord:Destroy()
+	end)
 
-	CloseBtn.MouseEnter:Connect(
-		function()
-			CloseBtn.BackgroundColor3 = Color3.fromRGB(240, 71, 71)
-		end
-	)
+	CloseBtn.MouseEnter:Connect(function()
+		CloseBtn.BackgroundColor3 = Color3.fromRGB(240, 71, 71)
+	end)
 
-	CloseBtn.MouseLeave:Connect(
-		function()
-			CloseBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
-		end
-	)
+	CloseBtn.MouseLeave:Connect(function()
+		CloseBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
+	end)
 
-	MinimizeBtn.MouseEnter:Connect(
-		function()
-			MinimizeBtn.BackgroundColor3 = Color3.fromRGB(40, 43, 46)
-		end
-	)
+	MinimizeBtn.MouseEnter:Connect(function()
+		MinimizeBtn.BackgroundColor3 = Color3.fromRGB(40, 43, 46)
+	end)
 
-	MinimizeBtn.MouseLeave:Connect(
-		function()
-			MinimizeBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
-		end
-	)
+	MinimizeBtn.MouseLeave:Connect(function()
+		MinimizeBtn.BackgroundColor3 = Color3.fromRGB(32, 34, 37)
+	end)
 
-	MinimizeBtn.MouseButton1Click:Connect(
-		function()
-			if minimized == false then
-				MainFrame:TweenSize(
-					UDim2.new(0, 681, 0, 22),
-					Enum.EasingDirection.Out,
-					Enum.EasingStyle.Quart,
-					.3,
-					true
-				)
-			else
-				MainFrame:TweenSize(
-					UDim2.new(0, 681, 0, 396),
-					Enum.EasingDirection.Out,
-					Enum.EasingStyle.Quart,
-					.3,
-					true
-				)
-			end
-			minimized = not minimized
+	MinimizeBtn.MouseButton1Click:Connect(function()
+		if minimized == false then
+			MainFrame:TweenSize(
+				UDim2.new(0, 681, 0, 22),
+				Enum.EasingDirection.Out,
+				Enum.EasingStyle.Quart,
+				.3,
+				true
+			)
+		else
+			MainFrame:TweenSize(
+				UDim2.new(0, 681, 0, 396),
+				Enum.EasingDirection.Out,
+				Enum.EasingStyle.Quart,
+				.3,
+				true
+			)
 		end
-	)
+		minimized = not minimized
+	end)
 	
 	local SettingsOpenBtn = Instance.new("TextButton")
 	local SettingsOpenBtnIco = Instance.new("ImageLabel")
