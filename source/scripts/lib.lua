@@ -2861,7 +2861,7 @@ function DiscordLib:Window(text)
 				ColorpickerTitle.Position = UDim2.new(0, 5, 0, 0)
 				ColorpickerTitle.Size = UDim2.new(0, 200, 0, 29)
 				ColorpickerTitle.Font = Enum.Font.Gotham
-				ColorpickerTitle.Text = "Colorpicker"
+				ColorpickerTitle.Text = text
 				ColorpickerTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
 				ColorpickerTitle.TextSize = 14.000
 				ColorpickerTitle.TextXAlignment = Enum.TextXAlignment.Left
