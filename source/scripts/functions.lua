@@ -5,6 +5,12 @@ local HttpService = game:GetService("HttpService")
 -- Variables
 local module = {}
 
+local Functions = {
+    Request = (syn and syn.request) or http_request or request,
+    QueueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport,
+    GetAsset = getsynasset or getcustomasset
+}
+
 -- Functions
 local function timestampToMillis(timestamp: string | number | DateTime)
     return (typeof(timestamp) == "string" and DateTime.fromIsoDate(timestamp).UnixTimestampMillis) or (typeof(timestamp) == "number" and timestamp) or timestamp.UnixTimestampMillis
