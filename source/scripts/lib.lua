@@ -3206,7 +3206,7 @@ function DiscordLib:Window(text)
 				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
 
 				coroutine.resume(coroutine.create(function()
-					while wait(0.6) do
+					while wait(0.3) do
 						local fps = 1 / game:GetService("RunService").RenderStepped:wait()
 						wait(0.7)
 						LabelTitle.Text = "Fps: "..math.ceil(fps)
@@ -3247,7 +3247,7 @@ function DiscordLib:Window(text)
 				coroutine.resume(coroutine.create(function()
 					while wait(0.6) do
 						local fps = 1 / game:GetService("RunService").RenderStepped:wait()
-						LabelTitle.Text = "Ping: "..math.ceil(fps)
+						LabelTitle.Text = "Ping: "..math.ceil(player:GetNetworkPing()  * 1000)
 					end
 				end))
 			end
