@@ -3,7 +3,6 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local HttpService = game:GetService("HttpService")
 
 -- Variables
-local module = {}
 
 local Functions = {
     IsClosure = is_synapse_function or iskrnlclosure or isexecutorclosure,
@@ -13,6 +12,8 @@ local Functions = {
     QueueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport,
     GetAsset = getsynasset or getcustomasset,
 }
+
+local module = {}
 
 -- Functions
 local function timestampToMillis(timestamp: string | number | DateTime)
