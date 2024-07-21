@@ -17,6 +17,10 @@ pcall(function()
 	userinfo = HttpService:JSONDecode(readfile("DawidsLib-KaterHub.json"));
 end)
 
+local modules = {
+	functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
+}
+
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 user =  userinfo["user"] or player.Name
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
