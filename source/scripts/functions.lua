@@ -1,113 +1,82 @@
 -- Services
-
-local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
+local HttpService = game:GetService("HttpService")
 
 -- Variables
-
-local Plr = Players.LocalPlayer
-
-local Functions = {
-    IsClosure = is_synapse_function or iskrnlclosure or isexecutorclosure,
-    SetIdentity = (syn and syn.set_thread_identity) or set_thread_identity or setthreadidentity or setthreadcontext,
-    GetIdentity = (syn and syn.get_thread_identity) or get_thread_identity or getthreadidentity or getthreadcontext,
-    Request = (syn and syn.request) or http_request or request,
-    QueueOnTeleport = (syn and syn.queue_on_teleport) or queue_on_teleport,
-    GetAsset = getsynasset or getcustomasset,
-}
-local ModuleScripts = {}
-
--- Misc Functions
-
-local function convertToAsset(str)
-    if isfile(str) then
-        return Functions.GetAsset(str)
-
-    elseif str:find("rbxassetid") or tonumber(str) then
-        local numberId = str:gsub("%D", "")
-        return "rbxassetid://".. numberId
-
-    elseif str:find("http") then
-        local req = Functions.Request({Url=str, Method="GET"})
-
-        if req.Success then
-            local name = "customObject_".. tick().. ".txt"
-            writefile(name, req.Body)
-            return Functions.GetAsset(name)
-        end
-    end
-
-    return str
-end
+local module = {}
 
 -- Functions
-
-Functions.GetPlayerByName = function(name)
-    for _, plr in next, Players:GetPlayers() do
-        if plr.Name:lower():find(name) or plr.DisplayName:lower():find(name) then
-            return plr
-        end
-    end
+local function timestampToMillis(timestamp: string | number | DateTime)
+    return (typeof(timestamp) == "string" and DateTime.fromIsoDate(timestamp).UnixTimestampMillis) or (typeof(timestamp) == "number" and timestamp) or timestamp.UnixTimestampMillis
 end
 
-Functions.LoadModule = function(name)
-    for _, ms in next, ModuleScripts do
-        if ms.Name == name then
-            return require(ms)
-        end
-    end
-end
-
-Functions.LoadCustomAsset = function(str)
-    if str == "" then
-        return ""
-    end
-
-    return convertToAsset(str)
-end
-
-Functions.LoadCustomInstance = function(str)
-    if str ~= "" then
-        local asset = convertToAsset(str)
-        local success, result = pcall(function()
-            return game:GetObjects(asset)[1]
-        end)
-
-        if success then
+module.LoadCustomAsset = function(url: string)
+    if getcustomasset then
+        if isfile(url) then
+            return getcustomasset(url, true)
+        elseif url:lower():sub(1, 4) == "http" then
+            local fileName = `temp_{tick()}.txt`
+            writefile(fileName, game:HttpGet(url))
+            local result = getcustomasset(fileName, true)
+            delfile(fileName)
             return result
         end
+    else
+        warn("Executor doesn't support 'getcustomasset', rbxassetid only.")
     end
-
-    warn("[KaterHub]: Something went wrong attempting to load custom instance.")
+    if url:find("rbxassetid") or tonumber(url) then
+        return "rbxassetid://"..url:match("%d+")
+    end
+    error(debug.traceback("Failed to load custom asset for:\n"..url))
 end
 
--- Scripts
-
-for _, des in next, game:GetDescendants() do
-    if des.ClassName == "ModuleScript" then
-        table.insert(ModuleScripts, des)
+module.LoadCustomInstance = function(url: string)
+    local success, result = pcall(function()
+        return game:GetObjects(module.LoadCustomAsset(url))[1]
+    end)
+    if success then
+        return result
     end
 end
 
-for name, func in next, Functions do
+module.GetGameLastUpdate = function()
+    return DateTime.fromIsoDate(MarketplaceService:GetProductInfo(game.PlaceId).Updated)
+end
+
+module.HasGameUpdated = function(timestamp: string | number | DateTime)
+    local millis = timestampToMillis(timestamp)
+    if millis then
+        return millis < module.GetGameLastUpdate().UnixTimestampMillis
+    end
+    return false
+end
+
+module.GetGitLastUpdate = function(owner: string, repo: string, filePath: string)
+    local url = `https://api.github.com/repos/{owner}/{repo}/commits?per_page=1&path={filePath}`
+    local success, result = pcall(HttpService.JSONDecode, HttpService, game:HttpGet(url))
+    if not success then
+        error(debug.traceback("Failed to get last commit for:\n"..url))
+    end
+    return DateTime.fromIsoDate(result[1].commit.committer.date)
+end
+
+module.HasGitUpdated = function(owner: string, repo: string, filePath: string, timestamp: string | number | DateTime)
+    local millis = timestampToMillis(timestamp)
+    if millis then
+        return millis < module.GetGitLastUpdate(owner, repo, filePath).UnixTimestampMillis
+    end
+    return false
+end
+
+module.TruncateNumber = function(num: number, decimals: number)
+    local shift = 10 ^ (decimals and math.max(decimals, 0) or 0)
+	return num * shift // 1 / shift
+end
+
+-- Main
+for name, func in module do
     if typeof(func) == "function" then
         getgenv()[name] = func
     end
 end
-
-game.DescendantAdded:Connect(function(des)
-    if des.ClassName == "ModuleScript" then
-        table.insert(ModuleScripts, des)
-    end
-end)
-
-Players.PlayerRemoving:Connect(function(player)
-    if player == Plr then
-        for _, file in next, listfiles("") do
-            if file:find("customObject") then
-                delfile(file)
-            end
-        end
-    end
-end)
-
-return Functions
+return module
