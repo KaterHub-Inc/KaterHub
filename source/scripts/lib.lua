@@ -17,8 +17,8 @@ pcall(function()
 	userinfo = HttpService:JSONDecode(readfile("DawidsLib-KaterHub.json"));
 end)
 
-local modules = {
-	functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
+local Modules = {
+	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/KaterHub/main/source/scripts/functions.lua"))()
 }
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
@@ -1989,7 +1989,7 @@ function DiscordLib:Window(text)
 		if img == "" then
 			Server.Text = string.sub(text, 1, 1)
 		else
-			ServerIco.Image = img
+			ServerIco.Image = LoadCustomAsset(img)
 		end
 
 		if fs == false then
@@ -2865,7 +2865,7 @@ function DiscordLib:Window(text)
 				ColorpickerTitle.Position = UDim2.new(0, 5, 0, 0)
 				ColorpickerTitle.Size = UDim2.new(0, 200, 0, 29)
 				ColorpickerTitle.Font = Enum.Font.Gotham
-				ColorpickerTitle.Text = "Colorpicker"
+				ColorpickerTitle.Text = text
 				ColorpickerTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
 				ColorpickerTitle.TextSize = 14.000
 				ColorpickerTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -2956,7 +2956,7 @@ function DiscordLib:Window(text)
 				PresetClrCorner.Name = "PresetClrCorner"
 				PresetClrCorner.Parent = PresetClr
 				
-				local function UpdateColorPicker(nope)
+				local function UpdateColorPicker()
 					PresetClr.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
 
@@ -3001,7 +3001,7 @@ function DiscordLib:Window(text)
 									ColorS = ColorX
 									ColorV = 1 - ColorY
 
-									UpdateColorPicker(true)
+									UpdateColorPicker()
 								end
 								)
 						end
@@ -3018,31 +3018,24 @@ function DiscordLib:Window(text)
 					end
 				)
 
-				Hue.InputBegan:Connect(
-					function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				Hue.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 
 
-							if HueInput then
-								HueInput:Disconnect()
-							end
-
-							HueInput =
-								RunService.RenderStepped:Connect(
-									function()
-									local HueY =
-										(math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) /
-											Hue.AbsoluteSize.Y)
-
-									HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
-									ColorH = 1 - HueY
-
-									UpdateColorPicker(true)
-								end
-								)
+						if HueInput then
+							HueInput:Disconnect()
 						end
+
+						HueInput = RunService.RenderStepped:Connect(function()
+							local HueY = (math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) / Hue.AbsoluteSize.Y)
+
+								HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
+								ColorH = 1 - HueY
+
+								UpdateColorPicker()
+						end)
 					end
-				)
+				end)
 
 				Hue.InputEnded:Connect(
 					function(input)
