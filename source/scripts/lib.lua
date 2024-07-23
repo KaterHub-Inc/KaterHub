@@ -1696,6 +1696,10 @@ function DiscordLib:Window(text)
 		ServerIco.Size = UDim2.new(0, 45, 0, 45)
 		ServerIco.Image = ""
 
+		ServerIcoCorner.CornerRadius = UDim.new(1, 0)
+		ServerIcoCorner.Name = "ServerIcoCorner"
+		ServerIcoCorner.Parent = ServerIco
+
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
 		ServerWhiteFrame.Parent = Server
 		ServerWhiteFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -1717,6 +1721,7 @@ function DiscordLib:Window(text)
 		local Glow = Instance.new("ImageLabel")
 		local ServerContentFrame = Instance.new("Frame")
 		local ServerCorner = Instance.new("UICorner")
+		local ServerIcoCorner = Instance.new("UICorner")
 		local ChannelTitleFrame = Instance.new("Frame")
 		local Hashtag = Instance.new("TextLabel")
 		local ChannelTitle = Instance.new("TextLabel")
