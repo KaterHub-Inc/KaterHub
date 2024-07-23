@@ -1693,7 +1693,7 @@ function DiscordLib:Window(text)
 		ServerIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ServerIco.BackgroundTransparency = 1.000
 		ServerIco.Position = UDim2.new(0.489361703, 0, 0.489361703, 0)
-		ServerIco.Size = UDim2.new(0, 46, 0, 46)
+		ServerIco.Size = UDim2.new(0, 45, 0, 45)
 		ServerIco.Image = ""
 
 		ServerWhiteFrame.Name = "ServerWhiteFrame"
@@ -2956,11 +2956,11 @@ function DiscordLib:Window(text)
 				PresetClrCorner.Name = "PresetClrCorner"
 				PresetClrCorner.Parent = PresetClr
 				
-				local function UpdateColorPicker()
+				local function UpdateColorPicker(nope)
 					PresetClr.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
 
-					pcall(callback, PresetClr.BackgroundColor3)
+					pcall(callback, Color3.fromHSV(ColorH, ColorS, ColorV))
 				end
 
 				ColorH =
@@ -3001,7 +3001,7 @@ function DiscordLib:Window(text)
 									ColorS = ColorX
 									ColorV = 1 - ColorY
 
-									UpdateColorPicker()
+									UpdateColorPicker(true)
 								end
 								)
 						end
@@ -3032,7 +3032,7 @@ function DiscordLib:Window(text)
 								HueSelection.Position = UDim2.new(0.48, 0, HueY, 0)
 								ColorH = 1 - HueY
 
-								UpdateColorPicker()
+								UpdateColorPicker(true)
 						end)
 					end
 				end)
