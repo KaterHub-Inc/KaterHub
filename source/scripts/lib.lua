@@ -1,3 +1,13 @@
+--[[
+    This is DiscordLib but edited and written by KaterHub.
+
+       __ _____ _____________  __ ____  _____ 
+      / //_/ _ /_  __/ __/ _ \/ // / / / / _ )
+     / ,< / __ |/ / / _// , _/ _  / /_/ / _  |
+    /_/|_/_/ |_/_/ /___/_/|_/_//_/\____/____/ 
+                                              
+]]
+
 local DiscordLib = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
