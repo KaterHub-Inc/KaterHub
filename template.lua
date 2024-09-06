@@ -6,7 +6,7 @@
 ██║  ██╗██║  ██║   ██║   ███████╗██║  ██║    ██║  ██║╚██████╔╝██████╔╝
 ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝   
 discord.gg/kSBmA2qKEp
-]]
 
+]]
 --- Updated Source
 loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))()
