@@ -17,6 +17,9 @@ local HttpService = game:GetService("HttpService")
 local players = game:GetService("Players")
 local player = players.LocalPlayer
 local Mouse = player:GetMouse()
+local mod = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Admins.lua"))()
+local prm = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub/master/main/katerhub/users/Premium.lua"))()
+
 
 local pfp
 local user
@@ -3262,6 +3265,70 @@ function DiscordLib:Window(text)
 						LabelTitle.Text = "Ping: "..math.ceil(player:GetNetworkPing()  * 1000)
 					end
 				end))
+			end
+
+			function ChannelContent:KaterHubUsers()
+				local Label = Instance.new("TextButton")
+				local LabelTitle = Instance.new("TextLabel")
+				local Premiums = 0
+
+				Label.Name = "´KaterHub Users"
+				Label.Parent = ChannelHolder
+				Label.BackgroundColor3 = Color3.fromRGB(54, 57, 63)
+				Label.BorderSizePixel = 0
+				Label.Position = UDim2.new(0.261979163, 0, 0.190789461, 0)
+				Label.Size = UDim2.new(0, 401, 0, 30)
+				Label.AutoButtonColor = false
+				Label.Font = Enum.Font.Gotham
+				Label.Text = ""
+				Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+				Label.TextSize = 14.000
+
+				LabelTitle.Name = "LabelTitle"
+				LabelTitle.Parent = Label
+				LabelTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				LabelTitle.BackgroundTransparency = 1.000
+				LabelTitle.Position = UDim2.new(0, 5, 0, 0)
+				LabelTitle.Size = UDim2.new(0, 200, 0, 30)
+				LabelTitle.Font = Enum.Font.Gotham
+				LabelTitle.Text = "Checking"
+				LabelTitle.TextColor3 = Color3.fromRGB(127, 131, 137)
+				LabelTitle.TextSize = 14.000
+				LabelTitle.TextXAlignment = Enum.TextXAlignment.Left
+				
+				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
+
+				coroutine.resume(coroutine.create(function()
+					LabelTitle.Text = "Checking"
+					wait(0.2)
+					LabelTitle.Text = "Checking."
+					wait(0.2)
+					LabelTitle.Text = "Checking.."
+					wait(0.2)
+					LabelTitle.Text = "Checking..."
+					wait(0.2)
+					LabelTitle.Text = "There are Currently "..Premiums.." other Premiums in this server."
+					while wait(5) do
+						LabelTitle.Text = "There are Currently "..Premiums.." other Premiums in this server."
+					end
+				end))
+
+				for q,v in pairs(players:GetPlayers()) do
+					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+						Premiums = Premiums + 1
+					end
+				end
+
+				players.PlayerAdded:Connect(function(plr)
+					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+						Premiums = Premiums + 1
+					end
+				end)
+				players.PlayerRemoving:Connect(function(plr)
+					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+						Premiums = Premiums - 1
+					end
+				end)
 			end
 
 			function ChannelContent:Bind(text, presetbind, callback)
