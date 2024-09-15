@@ -3311,24 +3311,24 @@ function DiscordLib:Window(text)
 					while wait(5) do
 						LabelTitle.Text = "There are Currently "..Premiums.." other Premiums in this server."
 					end
+
+					for q,v in pairs(players:GetPlayers()) do
+						if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+							Premiums = Premiums + 1
+						end
+					end
+
+					players.PlayerAdded:Connect(function(plr)
+						if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+							Premiums = Premiums + 1
+						end
+					end)
+					players.PlayerRemoving:Connect(function(plr)
+						if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
+							Premiums = Premiums - 1
+						end
+					end)
 				end))
-
-				for q,v in pairs(players:GetPlayers()) do
-					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
-						Premiums = Premiums + 1
-					end
-				end
-
-				players.PlayerAdded:Connect(function(plr)
-					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
-						Premiums = Premiums + 1
-					end
-				end)
-				players.PlayerRemoving:Connect(function(plr)
-					if table.find(prm,plr.UserId) or table.find(mod,plr.UserId) then
-						Premiums = Premiums - 1
-					end
-				end)
 			end
 
 			function ChannelContent:Bind(text, presetbind, callback)
