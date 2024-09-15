@@ -35,7 +35,7 @@ local Modules = {
 }
 
 pfp = userinfo["pfp"] or "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
-user =  userinfo["user"] or player.Name
+user =  userinfo["user"] or player.DisplayName
 tag = userinfo["tag"] or tostring(math.random(1000,9999))
 
 local function SaveInfo()
