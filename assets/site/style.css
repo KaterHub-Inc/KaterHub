@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body { 
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(https://github.com/KaterHub-Inc/KaterHub/blob/main/source/No%20cap.gif?raw=true);
+    background-size: cover;
+    background-position: center;
+}
+
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+  
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+   
+
+::-webkit-scrollbar-thumb {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: transparent; 
+}
+
+.navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after{
+    content: "";
+    height: 3px;
+    width: 0;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+@media only screen and (max-width: 600px) {
+    #ad-container2 {
+      display: none;
+    }
+  }
+
+@media only screen and (max-width: 600px) {
+    #ad-container {
+      display: none;
+    }
+  }
+#ad-container {
+    position: absolute;
+    top: 90px;
+    right: 20px;
+  }
+#ad-container2 {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+  }
+  
+
+.navbar ul li:hover::after{
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.content h1{
+    font-size: 60px;
+    margin-top: 70px;
+}
+
+h1 {
+    font-size: 60px;
+    height: 80px;
+    color: rgb(255, 255, 255)
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+button {
+    width: 150px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.content h2 {
+    font-size: 16px;
+    padding: 140px 0;
+    height: 50px;
+    margin: 20px 10px;
+    color: rgb(255, 255, 255)
+}
+button span {
+    background: rgba(255, 255, 255, 0.253);
+    height: 100%;
+    width: 0;
+    border-radius: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.3s;
+}
+
+
+h6, .h6 {
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+.discription {
+    text-decoration: none;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+    color: #f96332;
+    text-decoration: none;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+
+
+button {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+.commands {
+    color: white;
+    padding: 2% 5%;
+    font-size: 0.9em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+.commands li {
+    margin: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button:hover span{
+    width: 100%;
+}
+
+
+.discord_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.discord_main h1 {
+    margin-top: 10px;
+}
+
+.texts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.package {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.texts {
+    margin: 1%;
+}
+
+.packages {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.packagesDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.scriptDiv {
+    text-align: center;
+    align-items: center;
+}
+
+.scriptDiv hr {
+    width: 100%;
+}
+
+
+.buttons {
+    margin-right: 20%;
+}
+
+.scriptButtons {
+    display: flex;
+    flex-direction: row;
+}
+
+.scriptBox {
+    background-color: hsla(0, 0%, 25%, 0.744);
+    border: none;
+    width: 90%;
+    height: 90%;
+    text-align: start;
+    margin: 5%;
+    color: white;
+    padding: 3%;
+    resize: none;
+}
+
+p {
+    color: #fff;
+}
+
+.package p {
+    margin: 5%;
+    font-size: 120%;
+}
+
+.package {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 350px;
+    margin: 5%;
+    background: rgba(69, 69, 69, 0.163);
+}
+
+.video {
+    display: block;
+}
+
+pre {
+    text-align: left;
+    white-space: normal;
+    font-size: 80%;
+}
+
+#paste {
+    width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    *::-webkit-scrollbar {
+        display: none;
+    }
+
+    .discord_main {
+        flex-direction: column;
+    }
+
+    .packages {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+    }
+
+}
+
+.goTop {
+    z-index: 100;
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    border: none;
+    outline: none; 
+    cursor: pointer; 
+    font-size: 18px;
+    width: 34px;
+    background-color: var(--box-background-l);
+    padding: 7px;
+    border-radius: 9999px;
+}
+
+.goTop:hover {
+    background-color: var(--box-background-l);
+}
+
+.gradient-text {
+    /* Fallback: Set a background color. */
+    background-color: #e4b7b9;
+    
+    /* Create the gradient. */
+     background-image: linear-gradient(
+          45deg,
+          #ee898c 16.666%, 
+          #E16541 16.666%, 
+          #E16541 33.333%, 
+          #F18F43 33.333%, 
+          #f26ad9 50%, 
+          #cf8bf1 50%, 
+          #8B9862 66.666%, 
+          #476098 66.666%, 
+          #476098 83.333%, 
+          #A7489B 83.333%);
+    
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+  
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    
+    /* Animate the text when loading the element. */
+      /* This animates it on page load and when hovering out. */
+      animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+  
+  }
+  
+  .gradient-text:hover{
+      animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+  }
+
+
+  
+  
+  /* Move the background and make it smaller. */
+  /* Animation shown when entering the page and after the hover animation. */
+  @keyframes rainbow-text-simple-animation-rev {
+      0% {
+          background-size: 650%;
+      }
+      40% {
+          background-size: 650%;
+      }
+      100% {
+          background-size: 100%;
+      }
+  }
+  
+  /* Move the background and make it larger. */
+  /* Animation shown when hovering over the text. */
+  @keyframes rainbow-text-simple-animation {
+      0% {
+          background-size: 100%;
+      }
+      80% {
+          background-size: 650%;
+      }
+      100% {
+          background-size: 650%;
+      }
+  }
