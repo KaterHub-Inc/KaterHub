@@ -1,11 +1,10 @@
 {
   "invite": "kSBmA2qKEp",
-  "Kater": "@genesis.epsilon",
-  "version": 3,
-  "state": "recreating",
-  "description": "We introduce players to the other side of Roblox.",
+  "creator": "@w2pr",
+  "version": "V3",
   "info": {
-    "working": false
+    "working": false,
+    "description": "We introduce players to the other side of Roblox."
   },
   "images": {
     "icon": "https://github.com/Colin4President/assets/blob/main/discord/Lyfestyle%20albumcover.png?raw=true",
