@@ -43,9 +43,8 @@ example: :bring [USERNAME] or "." = everyone
 
 ```css
 :bring
-:kill
 :fling
-:freeze or :unfreeze
+:freeze or :thaw
 :kick
 ```
 (This product can be bought once per account and costs 25 robux!)
