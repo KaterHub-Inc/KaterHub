@@ -1,8 +1,8 @@
 <div align="left">
   <h3>What is KaterHub?</h3>
-  <p class="discription">KaterHub is a free tool for Roblox to have fun or to have fun with your friends!<br>If you have any problems with our tool please report the issue to our discord server!<br><br>Using our tool is only at your own risk! If something happens, we are not responsible for it</p>
+  <p class="discription">Katerhub is a universal, free, keyless and safe script made for trolling.<br>The script requires good functional executers and only runs on pc!</p>
   <h1>Info</h1>
-  <p class="discription">Since Roblox now has an anti-cheat it will be very difficult to bypass the system. Nevertheless, we will keep our tool online but will no longer update it!</p>
+  <p class="discription">Do not use KaterHub in shootergames and please check if the games has no anticheat since some script features like fly, fling or teleport can be easily detected!</p>
 </div>
 <div align="center">
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>
@@ -32,7 +32,7 @@ loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))()
 </div>
 <div align="center">
   <h2>Premium</h2>
-  <h3>Remember you can only use those commands on players that executed our script in your lobby/game!</h3>
+  <h3>Remember you can only use those commands on players that have executed our script in the same instance as you!</h3>
   <h2> </h2>
 </div>
 
