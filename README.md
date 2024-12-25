@@ -1,8 +1,8 @@
 <div align="left">
   <h3>What is KaterHub?</h3>
-  <p class="discription">Katerhub is a universal, free, keyless and safe script made for trolling.<br>The script requires good functional executers and only runs on pc!</p>
+  <p class="discription">Katerhub is a universal, free, keyless and safe script made for trolling.<br>The script requires good functional executers and only runs on pc!<br><br>Do not use KaterHub in shootergames and please check if the games has no anticheat since some script features like fly, fling or teleport can be easily detected!</p>
   <h1>Info</h1>
-  <p class="discription">Do not use KaterHub in shootergames and please check if the games has no anticheat since some script features like fly, fling or teleport can be easily detected!</p>
+  <p class="discription"></p>
 </div>
 <div align="center">
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>
