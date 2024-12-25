@@ -6,8 +6,7 @@
 </div>
 <div align="center">
   <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>
-  <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Moderator_and_Manager-Drills-red"></img></a>
-  <a href="https://github.com/KaterHub-Inc/KaterHub/raw/main/source/Kodak%20Black%20-%20ZEZE%20(feat.%20Travis%20Scott%20&%20Offset)%20%5BOfficial%20Audio%5D.mp3" target="_blank"><img src="https://img.shields.io/badge/Supporter_from_the_very_beginning-.Loveri-green"></img></a>
+</a>
   <a href="https://discord.gg/kSBmA2qKEp" target="_blank"><img src="https://img.shields.io/discord/1185906126022266920?logo=discord&label=Join%20our%20Discord!&color=ba34eb">  
   <h2>Script</h2>
   </img></a>
