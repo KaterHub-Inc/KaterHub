@@ -36,7 +36,6 @@ loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))()
   <h2>Premium</h2>
   <h3>Remember you can only use those commands on players that have executed our script in the same instance as you!</h3>
   <h2> </h2>
-</div>
 
 + adds a emoji to your name. [⭐]
 + makes you immune to other premium users.
