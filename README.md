@@ -11,7 +11,7 @@
   
 </a>
   <h2>Script</h2>
-    <a href="https://discordapp.com/users/947868747576778822" target="_blank"><img src="https://img.shields.io/badge/Founder_and_Scripter-Colin4President-blue"></img></a>  
+    <a href="https://discordapp.com/users/1093061434600075364" target="_blank"><img src="https://img.shields.io/badge/Project_Holder-w2pr-blue"></img></a>  
   </img></a>
 </div>
 
