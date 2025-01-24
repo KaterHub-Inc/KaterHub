@@ -47,5 +47,9 @@ example: :bring [USERNAME] or "." = everyone
 :fling
 :freeze or :thaw
 :kick
+:sendrequest
+
+/e test
+/e party
 ```
 (This product can be bought once per account and costs 25 robux!)
