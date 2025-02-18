@@ -1,7 +1,4 @@
 <div align="left">
-  <h1>About us</h1>
-  <p class="discription">We are a proud scripting community since 2020 with more than 3 projects.</p>
-   <a href="https://discord.gg/kSBmA2qKEp" target="_blank"><img src="https://img.shields.io/discord/1185906126022266920?logo=discord&label=Join%20our%20Discord!&color=ba34eb">
   <h3>Whats KaterHub?</h3>
   <p class="discription">Katerhub is a universal, free, keyless and safe script made for trolling.<br>The script requires good functional executers and only runs on pc!<br><br>Do not use KaterHub in shootergames and please check if the games has no anticheat since some script features like fly, fling or teleport can be easily detected!<br><br>Please avoid using solara since i noticed that solara starts to fuck up the script.<br>(Use something like Xeno its keyless and runs great, https://discord.gg/getxeno)</p>
   <h3>common questions</h3>
@@ -12,6 +9,7 @@
 </a>
   <h2>Script</h2>
     <a href="https://discordapp.com/users/1093061434600075364" target="_blank"><img src="https://img.shields.io/badge/Project_Holder-w2pr-blue"></img></a>  
+    <a href="https://discord.gg/kSBmA2qKEp" target="_blank"><img src="https://img.shields.io/discord/1185906126022266920?logo=discord&label=Join%20our%20Discord!&color=ba34eb">
   </img></a>
 </div>
 
