@@ -3,6 +3,7 @@ local PlsKaterHubNoMoreToday = {
   staff = "";
   blacklistednga = "🏳‍🌈";
   fan = "💖";
+  freaky = "😝";
 };
 
 return PlsKaterHubNoMoreToday
