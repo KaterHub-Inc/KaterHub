@@ -10,13 +10,13 @@ discord.gg/kSBmA2qKEp
 ]]
 
 --- Project loader!
-loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))({})
+loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))()
 ```
 ```lua
 -- KaterHub
-loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))({
-  project = "katerhub v4"
-})
+loadstring(game:HttpGet("https://katerhub-inc.github.io/KaterHub/main.lua"))(
+  "katerhub v4"
+)
 ```
 <div align="left">
   <a href="https://github.com/Colin4President/KaterHub" target="_blank"><img src="https://img.shields.io/github/contributors/Colin4President/KaterHub"></img></a>
