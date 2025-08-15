@@ -1,0 +1,10 @@
+return {
+  ["3.1"] = {
+    working = true;
+    lastupdate = os.date("*t",1754307633);
+  };
+  ["3.2"] = {
+    working = false;
+    lastupdate = nil;
+  };
+}
