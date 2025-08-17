@@ -1,10 +1,12 @@
 return {
   ["3.1"] = {
     working = true;
+    disabled = false;
     lastupdate = os.date("*t",1754307633);
   };
   ["3.2"] = {
     working = false;
+    disabled = true;
     lastupdate = nil;
   };
 }
