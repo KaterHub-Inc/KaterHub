@@ -1,7 +1,0 @@
-return {
-  ["3.2"] = {
-    working = true;
-    disabled = false;
-    lastupdate = os.date("*t",1755615854);
-  };
-}
